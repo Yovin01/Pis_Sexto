@@ -1,13 +1,9 @@
 import React from 'react';
 import '../css/hilarystyle.css';
-import 'boxicons'
-
-
+import 'boxicons';
 
 const Login = () => {
-     
     return (
-            
         <header className='header'>
             <nav className='navbar'>
                 <a href="#">Home</a>
@@ -17,15 +13,11 @@ const Login = () => {
             </nav>
 
             <form action="#" className="search-bar">
-                <input type="text" placeholder='Buscar...'/>
-                <button type='submit'><i class='bx bx-search-alt-2'></i></button>
+                <input type="text" placeholder='Buscar...' />
+                <button type='submit'><i className='bx bx-search-alt-2'></i></button>
             </form>
         </header>
-
-
-
     );
 };
 
- 
 export default Login;
