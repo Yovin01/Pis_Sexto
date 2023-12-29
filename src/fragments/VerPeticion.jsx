@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../css/yovinstyle.css'; // Archivo de estilos CSS
+import Footer from './Footer';
+import Header from './Header';
 
 const VerPeticion = () => {
     const [peticiones, setPeticiones] = useState([
@@ -46,11 +48,16 @@ const VerPeticion = () => {
     };
 
     return (
+        <div>
+            <Header/>
         <div className="contenedor">
             <h1>Listado de Peticiones</h1>
             {peticiones.map((peticion) => (
                 <PeticionCard key={peticion.id} {...peticion} />
             ))}
+           
+        </div>
+        <Footer />
         </div>
     );
 };
