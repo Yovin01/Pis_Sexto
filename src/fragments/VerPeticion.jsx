@@ -11,6 +11,19 @@ const VerPeticion = () => {
     const PeticionCard = ({ id, nombre, empresa, peticion }) => {
         const [abierto, setAbierto] = useState(false);
 
+        const handleAceptar = () => {
+            // Lógica para aceptar la petición
+            console.log(`Aceptar petición con ID: ${id}`);
+        };
+
+        const handleRechazar = () => {
+            // Lógica para rechazar la petición y eliminarla del estado
+            setPeticiones((prevPeticiones) =>
+                prevPeticiones.filter((p) => p.id !== id)
+            );
+            console.log(`Rechazar petición con ID: ${id}`);
+        };
+
         return (
             <div
                 className={`peticion-card ${abierto ? 'abierto' : ''}`}
@@ -22,6 +35,10 @@ const VerPeticion = () => {
                     <div>
                         <p>ID: {id}</p>
                         <p>Petición: {peticion}</p>
+                        <div>
+                            <button onClick={handleAceptar}>Aceptar</button>
+                            <button onClick={handleRechazar}>Rechazar</button>
+                        </div>
                     </div>
                 )}
             </div>
