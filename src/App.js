@@ -1,23 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import VerPeticion from './fragments/VerPeticion';
+import Principal from './fragments/Principal';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+      <Route path='/verpeticiones' element={<VerPeticion />} />
+
+      <Route path='/principal' element={<Principal />} />
+      </Routes>
+
     </div>
   );
 }
