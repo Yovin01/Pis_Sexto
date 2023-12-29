@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../css/yovinstyle.css'; // Archivo de estilos CSS
 
 const VerPeticion = () => {
     const [peticiones, setPeticiones] = useState([
@@ -6,6 +7,7 @@ const VerPeticion = () => {
         { id: 2, nombre: 'Usuario 2', empresa: 'Empresa B', peticion: 'Petición 2' },
         // Agrega más datos según sea necesario
     ]);
+
     const PeticionCard = ({ id, nombre, empresa, peticion }) => {
         const [abierto, setAbierto] = useState(false);
 
@@ -25,14 +27,15 @@ const VerPeticion = () => {
             </div>
         );
     };
+
     return (
-        <div>
+        <div className="contenedor">
             <h1>Listado de Peticiones</h1>
             {peticiones.map((peticion) => (
                 <PeticionCard key={peticion.id} {...peticion} />
             ))}
         </div>
     );
-
 };
+
 export default VerPeticion;
