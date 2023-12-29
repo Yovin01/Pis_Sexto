@@ -13,7 +13,7 @@ const Header = () => {
   return (<header id="header" className="fixed-top header-inner-pages">
     <div className="container d-flex align-items-center justify-content-between">
 
-      <h1 className="logo"><a href="index.html">Laboratorio remoto</a></h1>
+      <h1 className="logo"><a href="index.html">UV</a></h1>
       <a href="index.html" classNameName="logo">
         <image src="assets/img/logo.png" alt="" className="img-fluid" IM> </image></a>
 
