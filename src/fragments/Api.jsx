@@ -11,24 +11,37 @@ const Api = () => {
       var result = document.getElementById('result')
 
       const handleRunScript = () => {
-        //var root = location.protocol + '//jsonplaceholder.typicode.com'
-        var runMessage = document.getElementById('run-message')
-      
-        fetch('https://jsonplaceholder.typicode.com/posts')
-          .then((response) => response.json())
-          .then((json) => {
-            var str = JSON.stringify(json, null, '  ')
-      
-            // Format result
-            result.innerHTML = Prism.highlight(
-              str,
-              Prism.languages.javascript,
-              'javascript',
-            )
-      
-            runMessage.className = ''
-          })
+        // Check if the result and runMessage elements exist before manipulating them
+        const resultElement = document.getElementById('result');
+        const runMessageElement = document.getElementById('run-message');
+    
+        if (resultElement && runMessageElement) {
+          //var root = location.protocol + '//jsonplaceholder.typicode.com';
+          
+          fetch('https://jsonplaceholder.typicode.com/posts')
+            .then((response) => response.json())
+            .then((json) => {
+              var str = JSON.stringify(json, null, '  ');
+    
+              // Format result
+              resultElement.innerHTML = Prism.highlight(
+                str,
+                Prism.languages.javascript,
+                'javascript'
+              );
+    
+              // Show run message
+              runMessageElement.className = '';
+            })
+            .catch((error) => {
+              console.error('Error fetching data:', error);
+              // You can handle errors or update UI accordingly
+            });
+        } else {
+          console.error("Either 'result' or 'run-message' element is not found in the DOM.");
+        }
       };
+      
     return (
         <div>
             <div className='container mx-auto max-w-4xl mb-four'>
