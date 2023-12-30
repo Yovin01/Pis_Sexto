@@ -1,0 +1,22 @@
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ajusta la altura según tus necesidades */
+}
+
+.peticion-card {
+    border: 2px solid #e8f1f2; /* Agrega un borde alrededor de cada tarjeta */
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.peticion-card:hover {
+    border-color: #2970ca; /* Cambia el color del borde al pasar el ratón sobre la tarjeta */
+}
+
+.abierto {
+    border-color: #2f2d2e; /* Cambia el color del borde cuando la tarjeta está abierta */
+}
