@@ -1,14 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Login from './fragments/Login';
 
 function App() {
   return (
-    <Router>
+    <div className="App">
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
-    </Router>
+
+    </div>
   );
 }
 
