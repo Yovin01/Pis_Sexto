@@ -22,7 +22,7 @@ const Login = () => {
 
             </div>
 
-            <div className='container'>
+            <div className='container1'>
                 <div className='content'>
                     <h2 className='logo'><i className='bx bxs-sun'></i>API RADIACIÓN ULTRAVIOLETA</h2>
                     <div className='text-sci'>

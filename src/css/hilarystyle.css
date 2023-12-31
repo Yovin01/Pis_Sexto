@@ -107,7 +107,7 @@
   filter: blur(15px);
 }
 
-.container{
+.container1{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -121,7 +121,7 @@
   margin-top: 20px;
 }
 
-.container .content{
+.container1 .content{
   position: absolute;
   top: 0;
   left: 0;
@@ -135,7 +135,7 @@
   flex-direction: column;
 }
 
-.container .logreg-box{
+.container1 .logreg-box{
   position: absolute;
   top: 0;
   right: 0;
