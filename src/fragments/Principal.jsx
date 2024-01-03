@@ -2,12 +2,21 @@ import React from 'react';
 import '../css/garystyle.css';
 
 import imagen1 from '../Recursos/Imagenes/listados.jpg';
-
 import imagen2 from '../Recursos/Imagenes/vacio.png';
 import imagen3 from '../Recursos/Imagenes/4_1.png';
 import imagen4 from '../Recursos/Imagenes/4_3.png';
+import { useEffect } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css'; 
 
 const Principal = () => {
+
+  useEffect(() => {
+    // Coordenadas del mapa
+    var map = L.map('map').setView([-4.0079, -79.2115], 14);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  }, []);
+  
   return (
     <div className="container-fluid">
       {/* cabecera de la pagina */}
@@ -59,6 +68,7 @@ const Principal = () => {
                           <input style={{ height: 20, width: "100%" }} className="est_etqPequenias2" type="password" id="txt_password" placeholder="Password:" />
                         </div>
                       </div>
+                      
                     </div>
                     
                   </div>
@@ -71,7 +81,7 @@ const Principal = () => {
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
               <div className="panel panel-default" style={{ height: 500 }}>
                 <div className="panel-heading text-center">Ubicación Geográfica</div>
-                <div id="map" className="est_divContenedorGoogleMpas" />
+                <div id="map" className="est_divContenedorGoogleMpas" style={{ height: 400 }}/>
               </div>
             </div>
           </div>
@@ -187,8 +197,10 @@ const Principal = () => {
           </div>
         </div>
       </div>
+      <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     </div>
   );
 };
 
 export default Principal;
+
