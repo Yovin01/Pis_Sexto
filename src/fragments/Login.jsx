@@ -55,7 +55,7 @@ const Login = () => {
 
                             </div>
 
-                            <button type='submit' className='btn'>
+                            <button type='submit' className='btn1'>
                                 Ingresar
                             </button>
 
