@@ -1,5 +1,4 @@
 import React from 'react';
-import Login from './fragments/Login';
 import './App.css';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Login from './fragments/Login';
