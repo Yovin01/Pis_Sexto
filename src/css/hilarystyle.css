@@ -235,6 +235,12 @@
   margin-top: 25px;
 }
 
+.form-box .iconunl{
+  width: 85px;
+  height: 120px;
+  margin: 0 auto;
+}
+
 .login-register p a{
   color: #e4e4e4;
   font-weight: 600;
