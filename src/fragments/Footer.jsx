@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 const Footer = () => {
     return (
         <footer className="py-3 my-4">

@@ -1,5 +1,8 @@
 import { borrarSesion } from '../utiles/SessionUtil';
 import { useNavigate } from 'react-router';
+import '../css/hilarystyle.css';
+import 'boxicons';
+import unlIcon from '../UNL.png';
 
 
 const Header = () => {
@@ -10,27 +13,18 @@ const Header = () => {
     navegation('/login');
     // EN revision xddddddddddddddddddddddddddddddddddddd
   }
-  return (<header id="header" className="fixed-top header-inner-pages">
-    <div className="container d-flex align-items-center justify-content-between">
+  return ( <header className='header'>
+  <nav className='navbar'>
+      <a href="#">Home</a>
+      <a href="#">Sobre el API</a>
+      <a href="#">Contactos</a>
+  </nav>
+  {/** <form action="#" className="search-bar">
+      <input type="text" placeholder='Buscar...' />
+      <button type='submit'><i className='bx bx-search-alt-2'></i></button>
+  </form> */}
 
-      <h1 className="logo"><a href="index.html">UV</a></h1>
-      <a href="index.html" classNameName="logo">
-        <image src="assets/img/logo.png" alt="" className="img-fluid" IM> </image></a>
-
-      <nav id="navbar" className="navbar">
-        <ul>
-          <li><a className="nav-link scrollto active" href="/principal">Inicio</a></li>
-          <li><a className="nav-link scrollto" href="/modificar">Cambiar estado</a></li>
-          <li><a className="nav-link scrollto" href="/modificar">Resultados</a></li>
-          <li><a className="nav-link  scrollto" href="#portfolio">Sobre nosotros</a></li>
-          <li><a className="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a className="nav-link scrollto" onClick={handleClick}>Salir</a></li>
-        </ul>
-        <i className="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-
-    </div>
-  </header>)
+</header>)
 }
 
 export default Header;

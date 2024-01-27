@@ -49,17 +49,19 @@ const VerPeticion = () => {
 
     return (
         <div>
-            <Header/>
-        <div className="contenedor">
-            <h1>Listado de Peticiones</h1>
-            {peticiones.map((peticion) => (
-                <PeticionCard key={peticion.id} {...peticion} />
-            ))}
-           
-        </div>
-        <Footer />
+        
+            <div className="contenedor1">
+                <div>
+                    <h1>Listado de Peticiones</h1>
+                </div>
+                {peticiones.map((peticion) => (
+                    <PeticionCard key={peticion.id} {...peticion} />
+                ))}
+            </div>
+            <Footer />
         </div>
     );
+    
 };
 
 export default VerPeticion;
