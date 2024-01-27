@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/hilarystyle.css';
 import 'boxicons';
-import unlIcon from '../UNL.png';
+import unlIcon from '../img/logoUNl/UNL.png';
 import Header from './Header';
 
 const Login = () => {

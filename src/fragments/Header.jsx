@@ -2,7 +2,6 @@ import { borrarSesion } from '../utiles/SessionUtil';
 import { useNavigate } from 'react-router';
 import '../css/hilarystyle.css';
 import 'boxicons';
-import unlIcon from '../UNL.png';
 
 
 const Header = () => {
