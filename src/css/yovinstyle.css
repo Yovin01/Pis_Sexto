@@ -88,3 +88,37 @@
     font-weight: bold;
     /* Agrega otros estilos según sea necesario */
 }
+
+/* Agrega estos estilos a tu archivo CSS */
+.boton-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .aceptar-boton,
+  .rechazar-boton {
+    border: 2px solid #000000;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  .aceptar-boton {
+    margin-right: 10px;
+    background-color: #3bad71;
+  }
+  
+  .rechazar-boton {
+    margin-left: 10px;
+    background-color: #cd3e36;
+  }
+  
+  /* Media query para hacer los botones más pequeños en pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .aceptar-boton,
+    .rechazar-boton {
+      padding: 0px 5px;
+      font-size: 14px;
+    }
+  }
+  
