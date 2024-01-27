@@ -2,23 +2,13 @@ import React from 'react';
 import '../css/hilarystyle.css';
 import 'boxicons';
 import unlIcon from '../UNL.png';
+import Header from './Header';
 
 const Login = () => {
     return (
         <div>
-            <header className='header'>
-                <nav className='navbar'>
-                    <a href="#">Home</a>
-                    <a href="#">Sobre el API</a>
-                    <a href="#">Contactos</a>
-                </nav>
-                {/** <form action="#" className="search-bar">
-                    <input type="text" placeholder='Buscar...' />
-                    <button type='submit'><i className='bx bx-search-alt-2'></i></button>
-                </form> */}
-
-            </header>
-
+        
+        <Header/>
             <div className='background'>
 
             </div>
