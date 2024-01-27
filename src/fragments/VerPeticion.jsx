@@ -4,6 +4,7 @@ import Footer from './Footer';
 import Header from './Header';
 import mensajes from '../utiles/mensajes';
 import { metodoGet } from '../hooks/Conexion';
+import { format } from 'date-fns';
 const VerPeticion = () => {
     const [peticiones, setPeticiones] = useState([]);
     const [bucle, setBucle] = useState(false);
@@ -34,6 +35,7 @@ const VerPeticion = () => {
         const [abierto, setAbierto] = useState(false);
         const { correo, persona } = cuentum;
         const { nombres, apellidos, institucion } = persona;
+        var fechaHora = format(new Date(createdAt), 'yyyy-MM-dd HH:mm:ss');
         const handleAceptar = () => {
             // Lógica para aceptar la petición
             console.log(`Aceptar petición con ID: ${id}`);
@@ -54,6 +56,7 @@ const VerPeticion = () => {
                     <h2>{nombres + " " + apellidos}</h2>
                     <p>{correo}</p>
                     <p>{institucion}</p>
+                    <p>Fecha y Hora: {fechaHora}</p>
                     {abierto && (
                         <div>
                             <p>Petición: {peticion}</p>
