@@ -16,7 +16,7 @@ const BarraMenu = () => {
 
     return (
         <header className='header1'>
-            <a href="#" className="logo">Radiación Ultravioleta</a>
+            <a href="/principalusuario" className="logo">Radiación UV</a>
 
             <input type="checkbox" id='check' />
             <label htmlFor="check" className='icons1'>
@@ -28,7 +28,7 @@ const BarraMenu = () => {
             <nav className='navbar1'>
                 {rol === 'ADMINISTRADOR' && (
                     <>
-                        <a href="#">Usuarios</a>
+                        <a href="/usuariosregistrados">Usuarios</a>
                         <a href="/verpeticiones">Peticiones</a>
                     </>
                 )}

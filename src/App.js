@@ -6,6 +6,7 @@ import VerPeticion from './fragments/VerPeticion';
 import Principal from './fragments/Principal';
 import Api from './fragments/Api';
 import PrincipalUsuario from './fragments/PrincipalUsuario';
+import UsuariosRegistrados from './fragments/UsuariosRegistrados';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 
         <Route path='/principal' element={<Principal />} />
         <Route path='/api' element={<Api />} />
+        <Route path='/usuariosregistrados' element={<UsuariosRegistrados />} />
       </Routes>
 
     </div>

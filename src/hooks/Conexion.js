@@ -11,6 +11,17 @@ export const InicioSesion = async (data) => {
         body: JSON.stringify(data)
         
     })).json();
-    console.log("AQUIII", datos);
+    return datos;
+}
+
+export const ObtenerGet = async (key, url) => {
+    const headers = {
+        "Content-Type": "application/json",
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(`${URL}/${url}`, {
+        method: "GET",
+        headers: headers,
+    })).json();
     return datos;
 }
