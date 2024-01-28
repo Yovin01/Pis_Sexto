@@ -1,0 +1,30 @@
+.home-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.home-text {
+    flex-basis: 40%; /* Ajusta esto según tus necesidades */
+    text-align: left;
+}
+
+.home-image {
+    flex-basis: 50%; /* Ajusta esto según tus necesidades */
+}
+
+.home-image img {
+    top:auto;
+    width: 100%;
+    height: auto;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .home-text, .home-image {
+        flex-basis: 100%;
+        text-align: center;
+    }
+}
