@@ -93,6 +93,10 @@
   flex-direction: column;
 }
 
+.container1 .content .h2{
+  color: #0C2840;
+}
+
 .container1 .logreg-box{
   position: absolute;
   top: 0;
@@ -196,9 +200,10 @@
   font-size: 20px;
 }
 
-.content .logo{
+.content .text{
   font-size: 35px;
   margin: 5px 0;
+  font-weight: bold;
 }
 
 .text-sci h2{
@@ -216,6 +221,7 @@
 .text-sci p{
   font-size: 14px;
   margin: 40px 0;
+  text-align: justify;
 }
 
 .login-register p a{

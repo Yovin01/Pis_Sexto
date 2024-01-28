@@ -46,7 +46,7 @@ const Login = () => {
 
             <div className='container1'>
                 <div className='content'>
-                    <h2 className='logo'>API RADIACIÓN ULTRAVIOLETA</h2>
+                    <h2 className='text'>API RADIACIÓN ULTRAVIOLETA</h2>
                     <div className='text-sci'>
                         <h2>Bienvenido! <br /> <span>A un enfoque más consciente de la exposición solar en Loja</span></h2>
                         <p> Nuestra plataforma ha sido diseñada pensando en personas que buscan acceder
