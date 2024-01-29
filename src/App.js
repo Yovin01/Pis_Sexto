@@ -5,6 +5,7 @@ import Login from './fragments/Login';
 import VerPeticion from './fragments/VerPeticion';
 import Principal from './fragments/Principal';
 import Api from './fragments/Api';
+import Registro from './fragments/Registro';
 
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
 
         <Route path='/principal' element={<Principal />} />
         <Route path='/api' element={<Api />} />
+        <Route path='/registro' element={<Registro />} />
+
       </Routes>
 
     </div>

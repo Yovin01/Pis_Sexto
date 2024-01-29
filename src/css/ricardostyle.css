@@ -1,225 +1,186 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap'); 
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    
-  }  
-
-  body{
-    font-family: Arial, sans-serif;
-    background-color: #f6f7f9;
-  }
-
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 25px 12.5%;
-    background: transparent;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('../img/imagenesRegistro/imagen.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.navbar a{
-  position: relative;
-  font-size: 16px;
-  color: #e4e4e4;
-  text-decoration: none;
-  font-weight: 500;
-  margin-right: 30px;
-
-}
-
-.navbar a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 2px;
-  background: #e4e4e4;
+.container {
+  width: 1000px;
+  height: 1000px;
+  margin: 200px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  transform: translateY(10px);
-  opacity: 0;
-  transition: transform 0.5s, opacity 0.5s; 
-}
-
-.navbar a:hover::after {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.background{
-  width: 100%;
-  height: 100vh;
-  background: url('../result-01.jpeg') no-repeat;
-  background-size: cover;
-  background-position: center;
-  filter: blur(15px);
-}
-
-.container{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 30%;
-  height: 650px;
-  background: url('../result-01.jpeg') no-repeat;
-  background-size: cover;
-  background-position: center;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-
-.container .content{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 58%;
-  height: 100%;
-  background: transparent;
-  padding: 80px;
-  color: #e4e4e4;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-}
-
-.container .logreg-box{
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: calc(100%);
-  height: 100%;
-}
-
-.logreg-box .form-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  backdrop-filter: blur(75px);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  color: #e4e4e4;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
+  flex: 1;
+  padding-right: 40px;
+  background-image: url('../img/imagenesRegistro/unl.png');
+  background-size: 30% auto;
+  background-repeat: no-repeat;
+  background-position:600px 60px ;
 
 }
 
-.form-box h2{
-  font-size: 32px;
+p{
+
+text-align: center;
+color: #d2532c;
+padding-top: 70px;
+
+}
+ 
+header {
+  background-color: #0C2840;
+  padding: 30px;
+}
+
+footer {
+  background-color: #0C2840;
+  padding: 30px;
   text-align: center;
-}
-
-.form-box .input-box{
-  position: relative;
-  width: 300px;
-  height: 50px;
-  border-bottom: 2px solid #e4e4e4;
-  margin: 30px 0;
-}
-
-.input-box input{
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  color: #111010;
-  font-weight: 500;
-  padding-right: 28px;
-}
-
-.input-box label{
-  position: absolute;
-  top: 50%;
+  position: fixed;
   left: 0;
-  transform: translateY(-5%);
-  font-size: 16px;
-  font-weight: 500;
-  pointer-events: none;
-  transition: .5s ease;
-
-}
-
-
-.input-box input:focus~label,
-.input-box input:valid~label{
-  top: -5px;
-}
-
-.input-box .icon{
-  position: absolute;
-  top: 13px;
-  right: 0;
-  font-size: 20px;
-}
-
-.content .logo{
-  font-size: 35px;
-  margin: 5px 0;
-}
-
-.text-sci h2{
-  font-size: 30px;
-  line-height: 1;
-
-}
-
-.text-sci h2 span{
-  font-size: 20px;
-  
-}
-
-.text-sci p{
-  font-size: 14px;
-  margin: 40px 0;
-}
-
-.form-box .login-register{
-  font-size: 14.5px;
-  font-weight: 500;
-  text-align: center;
-  margin-top: 25px;
-}
-
-.login-register p a{
-  color: #e4e4e4;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.login-register p a:hover{
-  text-decoration: underline;
-}
-
-.btn{
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 0;
   width: 100%;
-  height: 45px;
-  background: #13396b;
-  border: none;
+}
+
+/*h1.headerTitulo {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ffffff;
+}*/
+
+h1.tituloRegistro {
+  padding-left: 50px;
+  padding-top: 40px;
+  font-size: 50px;
+  text-align: left;
+  margin-bottom: 100px;
+  color: #0C2840;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.col {
+  flex: 1;
+  margin-right: 25px;
+}
+
+label {
+  display: block;
+  margin-bottom: 25px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select,
+input[type="text"][placeholder] {
+  width: 100%;
+  padding: 20px;
+  /*padding-right: 40px;*/ /*nuevo para imagenes en imput*/
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  /*background-image: url('usuario.png');*/ /*nuevo para imagenes en imput*/
+  /*background-repeat: no-repeat;*/ /*nuevo para imagenes en imput*/
+  /*background-position: right center;/* /*nuevo para imagenes en imput*/ 
+}
+
+input[type="text"][placeholder]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
   outline: none;
-  border-radius: 4px;
+  border-color: #4CAF50;
+}
+
+input.name{
+  padding-right: 40px;
+  background-image: url('../img/imagenesRegistro/usuario.png');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+input.lastname{
+  padding-right: 40px;
+  background-image: url('../img/imagenesRegistro/firma.png');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+input.correo{
+  padding-right: 40px;
+  background-image: url('../img/imagenesRegistro/correo.png');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+input.fechanac{
+  padding-right: 40px;
+  background-image: url('../img/imagenesRegistro/nacimiento.png');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+input.pass{
+  padding-right: 40px;
+  background-image: url('../img/imagenesRegistro/confirmacion.png');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+input.passcon{
+  padding-right: 40px;
+  background-image: url('../img/imagenesRegistro/contrasena.png');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  padding-right: 30px;
+}
+
+button.botonDeRegistro{
+  width: 25%;
+  padding: 15px;
+  font-size: 15px;
+  background-color: #0C2840;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  color: #e4e4e4;
-  font-weight: 500;
-  box-shadow: 0 0 10px rgb(0, 0, 0, .5);
+  position: static;
+  transition: background-color 0.3s ease;
+  transform: translatey(120%);
 }
 
-.h3{
-  left: 100%;
+.botonDeRegistro:hover {
+  background-color: #d2532c;
+}
+
+
+a {
+  font-size: 15px;
+  color: #ffffff;
+  margin-right: 20px;
+  padding-top: -100px;
+  margin-top: -10px 
+}
+
+
+span {
+  font-size: 13px;
+  color: #ff5733;
+  font-weight:bolder;
+  border-radius: 4px;
 }

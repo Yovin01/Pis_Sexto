@@ -12,3 +12,25 @@ export const metodoGet = async (link,data, key) => {
   //  console.log((datos.info));
     return datos;
 }  
+
+
+export const GuardarPersona = async (key, data) => {
+    const headers = {
+        "Content-Type": "application/json",
+        "x-api-token": key
+    };
+    const requestOptions = {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(data)
+    };
+
+    try {
+        const response = await fetch(URL +'/guardar/personas', requestOptions);
+        const datos = await response.json();
+        return datos;
+    } catch (error) {
+        console.log("Error:", error);
+        throw error;
+    }
+}
