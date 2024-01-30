@@ -45,3 +45,14 @@ export const getUser = () => {
     }
     return null;
 };
+
+//CORREO
+export const saveCorreo = (correo) => {
+    localStorage.setItem("correo", correo);
+}
+ 
+export const getCorreo= () => {
+    return localStorage.getItem('correo');
+}
+
+

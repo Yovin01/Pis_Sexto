@@ -8,7 +8,7 @@
 .containerUsuarios{
     width: 100%;
     height: 100vh;
-    background: url(../UNI.png);
+    background: url(../img/UNI.png) no-repeat;
     background-size: cover;
     background-position: center;
     display: flex;

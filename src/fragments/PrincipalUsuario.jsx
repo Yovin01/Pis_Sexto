@@ -1,7 +1,7 @@
 import '../css/homeStyle.css';
 import '../css/barraMenuStyle.css';
 import BarraMenu from './BarraMenu';
-import logoIcon from '../LOGO_TRANSPARENTE.png';
+import logoIcon from '../img/LOGO_UV.png';
 import { getRol, getUser } from '../utiles/SessionUtil';
 import React, { useEffect, useState } from 'react';
 
@@ -33,10 +33,6 @@ const PrincipalUsuario = () => {
                         </p>
                     </>)}
 
-                </div>
-                <div className="home-image">
-                    {/* Aquí puedes colocar tu imagen */}
-                    <img src={logoIcon} alt="Logo de radiacion UV" />
                 </div>
             </section >
            

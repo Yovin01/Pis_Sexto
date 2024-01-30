@@ -33,7 +33,7 @@ const BarraMenu = () => {
                     </>
                 )}
                 {rol === 'USUARIO' && <a href="/api">API</a>}
-                <a href="#">Perfil</a>
+                <a href="/perfil">Perfil</a>
                 <a href="/principal" onClick={handleClick}>Cerrar Sesión</a>
             </nav>
         </header>

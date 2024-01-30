@@ -2,10 +2,10 @@ import React from 'react';
 import '../css/hilarystyle.css';
 import '../css/headerStyle.css';
 import 'boxicons';
-import logoIcon from '../LOGO_TRANSPARENTE.png';
+import logoIcon from '../img/LOGO_UV.png';
 import Header from './Header';
 import { InicioSesion, obtener } from '../hooks/Conexion'
-import { getRol, getToken, getUser, saveRol, saveToken, saveUser } from '../utiles/SessionUtil';
+import { getRol, getToken, getUser, saveCorreo, saveRol, saveToken, saveUser } from '../utiles/SessionUtil';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import mensajes from '../utiles/Mensajes';
@@ -21,15 +21,16 @@ const Login = () => {
             "clave": data.clave
         };    
 
-        InicioSesion(datos).then((info) => {
-            
+        InicioSesion(datos).then((info) => {     
             var infoAux = info.info;
+            console.log(infoAux);
             if (info.code !== 200) {
                 mensajes(info.msg, "error", "error")
             } else {
                 saveToken(infoAux.token);
                 saveRol(infoAux.rol);
                 saveUser(infoAux.user);
+                saveCorreo(infoAux.correo);
                 navegation("/PrincipalUsuario");
                 mensajes(info.msg);
             }

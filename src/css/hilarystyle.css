@@ -59,7 +59,7 @@
 .background{
   width: 100%;
   height: 100vh;
-  background: url('../UNI.png') no-repeat;
+  background: url('../img/UNI.png') no-repeat;
   background-size: cover;
   background-position: center;
   filter: blur(4px);
@@ -150,8 +150,8 @@
 }
 
 .form-box .iconunl {
-  width: 130px;
-  height: 120px;
+  width: 180px;
+  height: 150px;
   margin: 0 auto;
 }
 
