@@ -1,6 +1,6 @@
 const URL = "http://localhost:5006/api"
 
-export const metodoGet = async (link,data, key) => {
+export const metodoGet = async (link, key) => {
     var cabecera = {
         "x-api-token": key,
         "Content-Type": "application/json",
