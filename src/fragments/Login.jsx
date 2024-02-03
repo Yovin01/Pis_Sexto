@@ -8,7 +8,7 @@ import { InicioSesion, obtener } from '../hooks/Conexion'
 import { getRol, getToken, getUser, saveCorreo, saveRol, saveToken, saveUser } from '../utiles/SessionUtil';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { mensajes } from '../utiles/mensajes';
+import mensajes from '../utiles/Mensajes';
 
 const Login = () => {
 
@@ -31,8 +31,8 @@ const Login = () => {
                 saveRol(infoAux.rol);
                 saveUser(infoAux.user);
                 saveCorreo(infoAux.correo);
-                navegation("/PrincipalUsuario");
-                mensajes(info.msg);
+                navegation("/principalusuario");
+                mensajes(info.info);
             }
         })
     };

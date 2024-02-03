@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../css/yovinstyle.css';
 import Footer from './Footer';
 import Header from './Header';
-import mensajes from '../utiles/mensajes';
+import mensajes from '../utiles/Mensajes';
 import { metodoGet } from '../hooks/Conexion';
 import { format } from 'date-fns';
 const VerPeticion = () => {
