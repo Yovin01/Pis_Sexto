@@ -1,10 +1,42 @@
 import React from 'react';
 import '../css/hilarystyle.css';
+import '../css/headerStyle.css';
 import 'boxicons';
-import unlIcon from '../img/logoUNl/UNL.png';
+import logoIcon from '../img/LOGO_UV.png';
 import Header from './Header';
+import { InicioSesion, obtener } from '../hooks/Conexion'
+import { getRol, getToken, getUser, saveCorreo, saveRol, saveToken, saveUser } from '../utiles/SessionUtil';
+import { useNavigate } from 'react-router';
+import { useForm } from 'react-hook-form';
+import mensajes from '../utiles/Mensajes';
 
 const Login = () => {
+
+    const navegation = useNavigate();
+    const { register, formState: { errors }, handleSubmit} = useForm();
+
+    const onSubmit = (data) => {
+        var datos = {
+            "correo": data.correo,
+            "clave": data.clave
+        };    
+
+        InicioSesion(datos).then((info) => {     
+            var infoAux = info.info;
+            console.log(infoAux);
+            if (info.code !== 200) {
+                mensajes(info.msg, "error", "error")
+            } else {
+                saveToken(infoAux.token);
+                saveRol(infoAux.rol);
+                saveUser(infoAux.user);
+                saveCorreo(infoAux.correo);
+                navegation("/principalusuario");
+                mensajes(info.info);
+            }
+        })
+    };
+
     return (
         <div>
         
@@ -15,7 +47,7 @@ const Login = () => {
 
             <div className='container1'>
                 <div className='content'>
-                    <h2 className='logo'><i className='bx bxs-sun'></i>API RADIACIÓN ULTRAVIOLETA</h2>
+                    <h2 className='text'>API RADIACIÓN ULTRAVIOLETA</h2>
                     <div className='text-sci'>
                         <h2>Bienvenido! <br /> <span>A un enfoque más consciente de la exposición solar en Loja</span></h2>
                         <p> Nuestra plataforma ha sido diseñada pensando en personas que buscan acceder
@@ -27,42 +59,33 @@ const Login = () => {
 
                 <div className='logreg-box'>
                     <div className='form-box login'>
+                        <div className='iconunl'>
+                            <img src={logoIcon} alt="Logo UNL" />
+                        </div>
+                        <h2>Iniciar Sesión</h2>
 
-                        <form action="#">
-                            <div className='iconunl'>
-                                <img src={unlIcon} alt="Logo UNL" />
-
-                            </div>
-                            <h2>
-                                Iniciar Sesión
-                            </h2>
-
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <div className='input-box'>
-                                <span className='icon'><i class='bx bxs-envelope' ></i></span>
-                                <input type="email" required />
+                                <span className='icon'><i className='bx bxs-envelope'></i></span>
+                                <input type="email" required {...register('correo', { required: true, pattern: /^\S+@\S+$/ })} />
+                                {errors.correo && errors.correo.type === 'required' && <div className='alert alert-danger'>Ingrese el correo</div>}
+                                {errors.correo && errors.correo.type === 'pattern' && <div className='alert alert-danger'>Ingrese un correo valido</div>}
                                 <label>Correo electrónico</label>
-
                             </div>
 
                             <div className='input-box'>
-                                <span className='icon'><i class='bx bxs-lock-alt' ></i></span>
-                                <input type="password" required />
+                                <span className='icon'><i className='bx bxs-lock-alt'></i></span>
+                                <input type="password" required {...register('clave', { required: true })}  />
+                                {errors.clave && errors.clave.type === 'required' && <div className='alert alert-danger'>Ingrese una clave</div>}
                                 <label>Contraseña</label>
-
                             </div>
 
-                            <button type='submit' className='btn1'>
-                                Ingresar
-                            </button>
-
-                            <div className='login-register'>
-                                <p>¿No tienes cuenta?
-                                    <a href="#" className='register-link'> Registrate</a>
-                                </p>
-                            </div>
-
+                            <button type='submit' className='btn1'>Ingresar</button>
                         </form>
 
+                        <div className='login-register'>
+                            <p>¿No tienes cuenta? <a href="#" className='register-link'>Regístrate</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
