@@ -25,7 +25,7 @@ const Login = () => {
             var infoAux = info.info;
             console.log(infoAux);
             if (info.code !== 200) {
-                mensajes(info.msg, "error", "error")
+                mensajes(info.msg, "error", "Error")
             } else {
                 saveToken(infoAux.token);
                 saveRol(infoAux.rol);
@@ -68,15 +68,15 @@ const Login = () => {
                             <div className='input-box'>
                                 <span className='icon'><i className='bx bxs-envelope'></i></span>
                                 <input type="email" required {...register('correo', { required: true, pattern: /^\S+@\S+$/ })} />
-                                {errors.correo && errors.correo.type === 'required' && <div className='alert alert-danger'>Ingrese el correo</div>}
-                                {errors.correo && errors.correo.type === 'pattern' && <div className='alert alert-danger'>Ingrese un correo valido</div>}
+                                {errors.correo && errors.correo.type === 'required' && <div>Ingrese el correo</div>}
+                                {errors.correo && errors.correo.type === 'pattern' && <div>Ingrese un correo valido</div>}
                                 <label>Correo electrónico</label>
                             </div>
 
                             <div className='input-box'>
                                 <span className='icon'><i className='bx bxs-lock-alt'></i></span>
                                 <input type="password" required {...register('clave', { required: true })}  />
-                                {errors.clave && errors.clave.type === 'required' && <div className='alert alert-danger'>Ingrese una clave</div>}
+                                {errors.clave && errors.clave.type === 'required' && <div >Ingrese una clave</div>}
                                 <label>Contraseña</label>
                             </div>
 
