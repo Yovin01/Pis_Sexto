@@ -15,6 +15,7 @@ const Header = () => {
   return ( <header className='header'>
   <nav className='navbar'>
       <a href="#">Home</a>
+      <a href="/login">Login</a>
       <a href="#">Sobre el API</a>
       <a href="#">Contactos</a>
   </nav>

@@ -13,6 +13,31 @@ export const metodoGet = async (link,data, key) => {
     return datos;
 }  
 
+export const ObtenerGet = async (key, url) => {
+    const headers = {
+        "Content-Type": "application/json",
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(`${URL}/${url}`, {
+        method: "GET",
+        headers: headers,
+    })).json();
+    return datos;
+}
+
+export const PostGuardar = async (data, key, urls) => {
+    const headers = {
+        "Content-Type": "application/json",
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(`${URL}/${urls}`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(data),
+    })).json();
+    return datos;
+}
+
 
 export const GuardarPersona = async (key, data) => {
     const headers = {
