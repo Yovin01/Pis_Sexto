@@ -90,11 +90,11 @@ const VerPeticion = () => {
     return (
         <div>
             <Header />
-            <div className='background'>
+            <div className='backgroundYovin'>
             </div>
-            <div className="container1">
-                <dir className="content">
-                    <dir className="content">
+            <div className="contentYovin1">
+                <dir className="contentYovin">
+                    <dir className="contentYovin">
                         <h1 className="titulo-peticiones">Listado de Peticiones</h1>
 
                         {peticiones.map((peticion) => (
