@@ -18,7 +18,7 @@ import { sugerencias } from './utiles/vistaChat';
 import { SugerenciaButton } from './utiles/vistaChat';
 import { LimpiarChatButton } from './utiles/vistaChat';
 
-const App = () => {
+const ChatBot = () => {
 
   const [messages, setMessages] = useState([]);
   const [inputContent, setInputContent] = useState('');
@@ -161,4 +161,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default ChatBot;

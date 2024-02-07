@@ -9,6 +9,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Grafica from './Grafica';
 import customMarkerImage from '../img/puntoUbi/map-pin3.png';
+import ChatBot from './ChatBot';
 const Principal = () => {
 
   useEffect(() => {
@@ -78,6 +79,7 @@ const Principal = () => {
                   <div className="panel-heading text-center">Grafico Histograma</div>
                   <Grafica />
                 </div>
+                <ChatBot />
               </div>
             </div>
           </dir>
