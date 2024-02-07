@@ -79,14 +79,18 @@ const Principal = () => {
                   <div className="panel-heading text-center">Grafico Histograma</div>
                   <Grafica />
                 </div>
-                <ChatBot />
+              
               </div>
             </div>
           </dir>
           <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         </dir>
+        
       </div>
+      
+      <ChatBot />  
     </div>
+    
   );
 };
 

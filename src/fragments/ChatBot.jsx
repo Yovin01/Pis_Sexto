@@ -3,20 +3,21 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Slide } from 'react-awesome-reveal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Contenedor } from './utiles/vistaChat';
-import { ChatCircleButton } from './utiles/vistaChat';
-import { Titulo } from './utiles/vistaChat';
-import { MensajesContainer } from './utiles/vistaChat';
-import { Mensaje } from './utiles/vistaChat';
-import { Formulario } from './utiles/vistaChat';
-import { InputText } from './utiles/vistaChat';
-import { ButtonSubmit } from './utiles/vistaChat';
-import { LoadingDots } from './utiles/vistaChat';
-import { TituloSugerencia } from './utiles/vistaChat';
-import { SugerenciasContainer } from './utiles/vistaChat';
-import { sugerencias } from './utiles/vistaChat';
-import { SugerenciaButton } from './utiles/vistaChat';
-import { LimpiarChatButton } from './utiles/vistaChat';
+import {ContenedorRicardo, ChatCircleButton,
+  Titulo,
+  MensajesContainer,
+  Mensaje,
+  Formulario,
+  InputText,
+  ButtonSubmit,
+  LoadingDots,
+  TituloSugerencia,
+  SugerenciasContainer,
+  sugerencias,
+  SugerenciaButton,
+  LimpiarChatButton
+} from '../utiles/vistaChat';
+
 
 const ChatBot = () => {
 
@@ -27,7 +28,7 @@ const ChatBot = () => {
   const apiKey = "AIzaSyBcVWGbWToIhZKuA7yOnCWtDzuIyXi_mnI";
   const mensajesRef = useRef(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
-  
+
   const handleSugerenciaClick = (sugerencia) => {
     setInputContent(sugerencia);
   };
@@ -124,7 +125,7 @@ const ChatBot = () => {
   return (
     <div>
       <ChatCircleButton onClick={toggleChat}>Chat</ChatCircleButton>
-      <Contenedor isOpen={isChatOpen}>
+      <ContenedorRicardo isOpen={isChatOpen}>
         <Titulo>Asistente Chatbot</Titulo>
         <MensajesContainer ref={mensajesRef}>
           {messages.map((message, index) => (
@@ -156,7 +157,7 @@ const ChatBot = () => {
         </SugerenciasContainer>
         <LimpiarChatButton onClick={handleLimpiarChat}>Limpiar Chat</LimpiarChatButton>
         <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-      </Contenedor>
+      </ContenedorRicardo>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import styled, {keyframes} from 'styled-components';
 // Componente de estilo para el contenedor principal
-export const Contenedor = styled.div`
+export const ContenedorRicardo = styled.div`
   max-width: 400px;
   max-height: 650px;
   margin: 0 auto;
