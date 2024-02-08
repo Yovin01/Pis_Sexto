@@ -71,7 +71,7 @@ const Contactos = () => {
             </div>
             <footer class="bg-body-tertiary text-center text-lg-start">
                 <div class="text-center p-3" style={{ color: '#fff', backgroundColor: '#0C2840', marginTop: '10px', height: '100px', textAlign: 'center', marginLeft: '-200px', marginRight: '-200px' }}>
-                    © 2024 Copyright
+                    © 2024 API UV
                 </div>
             </footer>
         </section>

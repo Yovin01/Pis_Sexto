@@ -1,0 +1,79 @@
+.containerTitulos{
+    margin-top: 120px;
+    margin-left: 50px;
+}
+
+.containerTitulos h2{
+    font-weight: bold;
+}
+
+.containerPeticionesPost input{
+    margin-left: 20px;
+    
+}
+
+.containerPeticionesPost button{
+    color: red;
+    border: 2px solid #0C2840;
+}
+
+.containerPeticionesGet button{
+  color: red;
+  border: 2px solid #0C2840;
+}
+
+.containerPeticionesPost .fecha{
+    font-weight: bold;
+    text-decoration: underline;
+    padding-left: 50px;
+}
+
+.containerPrincipal {
+    display: flex;
+    justify-content: space-between;
+  }
+
+.containerPeticionesPost, .containerPeticionesGet {
+    flex: 1;
+    margin: 10px;
+    margin-right: 1000px;
+  }
+  
+  .containerConsola {
+    border: 2px solid #0C2840; 
+    margin: 10px;
+    padding: 10px; 
+    display: none; 
+    border-radius: 15px;
+  }
+  
+  /* Estilo para mostrar el contenedor de consola */
+  .containerConsola.active {
+    display: block; /* Muestra el contenedor si está activo */
+  }
+  
+  /* Estilo para el contenedor principal que divide POST y GET */
+  .containerPrincipal {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .containerPeticionesGet h2{
+    font-weight: bold;
+  }
+
+  .containerPeticionesGet {
+    padding-left: 80px;
+    border: 2px solid #0C2840;
+  }
+
+  .containerPeticionesPost {
+    padding-left: 80px;
+    border: 2px solid #0C2840;
+  }
+
+  .containerPeticionesPost h2{
+    font-weight: bold;
+  }
+  
+

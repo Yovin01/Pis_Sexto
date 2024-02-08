@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/hilarystyle.css';
 import '../css/headerStyle.css';
 import 'boxicons';
@@ -13,15 +13,25 @@ import mensajes from '../utiles/Mensajes';
 const Login = () => {
 
     const navegation = useNavigate();
-    const { register, formState: { errors }, handleSubmit} = useForm();
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    const [focused, setFocused] = useState({ correo: false, clave: false });
+
+    const handleFocus = (field) => {
+        setFocused({ ...focused, [field]: true });
+    };
+
+    const handleBlur = (field, hasValue) => {
+        setFocused({ ...focused, [field]: hasValue });
+    };
+
 
     const onSubmit = (data) => {
         var datos = {
             "correo": data.correo,
             "clave": data.clave
-        };    
+        };
 
-        InicioSesion(datos).then((info) => {     
+        InicioSesion(datos).then((info) => {
             var infoAux = info.info;
             console.log(infoAux);
             if (info.code !== 200) {
@@ -39,8 +49,8 @@ const Login = () => {
 
     return (
         <div>
-        
-        <Header/>
+
+            <Header />
             <div className='background'>
 
             </div>
@@ -67,17 +77,38 @@ const Login = () => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className='input-box'>
                                 <span className='icon'><i className='bx bxs-envelope'></i></span>
-                                <input type="email" required {...register('correo', { required: true, pattern: /^\S+@\S+$/ })} />
-                                {errors.correo && errors.correo.type === 'required' && <div>Ingrese el correo</div>}
-                                {errors.correo && errors.correo.type === 'pattern' && <div>Ingrese un correo valido</div>}
-                                <label>Correo electrónico</label>
+                                <input type="email"
+                                    {...register("correo", {
+                                        required: {
+                                            value: true,
+                                            message: "Ingrese un correo"
+                                        },
+                                        pattern: {
+                                            value: /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/,
+                                            message: "Correo no válido"
+                                        }
+                                    })}
+                                    onFocus={() => handleFocus('correo')}
+                                    onBlur={(e) => handleBlur('correo', e.target.value !== '')}
+                                />
+                                {errors.correo && <span className='mensajeerror'>{errors.correo.message}</span>}
+                                <label className={focused.correo ? 'active' : ''}>Correo electrónico</label>
                             </div>
 
                             <div className='input-box'>
                                 <span className='icon'><i className='bx bxs-lock-alt'></i></span>
-                                <input type="password" required {...register('clave', { required: true })}  />
-                                {errors.clave && errors.clave.type === 'required' && <div >Ingrese una clave</div>}
-                                <label>Contraseña</label>
+                                <input type="password"
+                                    {...register("clave", {
+                                        required: {
+                                            value: true,
+                                            message: "Ingrese una contraseña"
+                                        }
+                                    })}
+                                    onFocus={() => handleFocus('clave')}
+                                    onBlur={(e) => handleBlur('clave', e.target.value !== '')}
+                                />
+                                {errors.clave && <span className='mensajeerror'>{errors.clave.message}</span>}
+                                <label className={focused.clave ? 'active' : ''}>Contraseña</label>
                             </div>
 
                             <button type='submit' className='btn1'>Ingresar</button>

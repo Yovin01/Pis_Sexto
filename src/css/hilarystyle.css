@@ -174,24 +174,20 @@
 }
 
 
-.input-box label{
+.input-box label {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 0;
-  transform: translateY(-50%);
-  font-size: 16px;
-  font-weight: 500;
   pointer-events: none;
-  transition: .5s ease;
-  pointer-events: none;
-
+  transition: 0.5s;
+  color: #fff;
 }
 
-.input-box input:focus~label,
-.input-box input:valid~label{
-  top: -5px;
+.input-box label.active {
+  top: -15px;
   left: 0;
 }
+
 
 .input-box .icon{
   position: absolute;
@@ -250,6 +246,15 @@
   font-weight: 500;
   box-shadow: 0 0 10px rgb(0, 0, 0, .5);
   font-weight: bold;
+}
+
+
+.mensajeerror {
+  font-size: 13px;
+  color: #c71700;
+  font-weight:bolder;
+  border-radius: 4px;
+  font-style: italic;
 }
 
 /*RESPONSIVIDAD*/
