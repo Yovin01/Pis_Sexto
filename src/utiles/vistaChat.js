@@ -1,6 +1,6 @@
 import styled, {keyframes} from 'styled-components';
 // Componente de estilo para el contenedor principal
-export const Contenedor = styled.div`
+export const ContenedorRicardo = styled.div`
   max-width: 400px;
   max-height: 650px;
   margin: 0 auto;
@@ -98,7 +98,7 @@ export const InputText = styled.input`
 `;
 
 // Componente de estilo para el botón de envío
-export const ButtonSubmit = styled.button`
+export const ButtonSubmitR = styled.button`
   padding: 10px 20px;
   background-color: #3498db;
   color: #fff;

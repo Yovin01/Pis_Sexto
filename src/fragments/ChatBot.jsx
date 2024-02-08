@@ -3,22 +3,23 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Slide } from 'react-awesome-reveal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Contenedor } from './utiles/vistaChat';
-import { ChatCircleButton } from './utiles/vistaChat';
-import { Titulo } from './utiles/vistaChat';
-import { MensajesContainer } from './utiles/vistaChat';
-import { Mensaje } from './utiles/vistaChat';
-import { Formulario } from './utiles/vistaChat';
-import { InputText } from './utiles/vistaChat';
-import { ButtonSubmit } from './utiles/vistaChat';
-import { LoadingDots } from './utiles/vistaChat';
-import { TituloSugerencia } from './utiles/vistaChat';
-import { SugerenciasContainer } from './utiles/vistaChat';
-import { sugerencias } from './utiles/vistaChat';
-import { SugerenciaButton } from './utiles/vistaChat';
-import { LimpiarChatButton } from './utiles/vistaChat';
+import {ContenedorRicardo, ChatCircleButton,
+  Titulo,
+  MensajesContainer,
+  Mensaje,
+  Formulario,
+  InputText,
+  ButtonSubmitR,
+  LoadingDots,
+  TituloSugerencia,
+  SugerenciasContainer,
+  sugerencias,
+  SugerenciaButton,
+  LimpiarChatButton
+} from '../utiles/vistaChat';
 
-const App = () => {
+
+const ChatBot = () => {
 
   const [messages, setMessages] = useState([]);
   const [inputContent, setInputContent] = useState('');
@@ -27,7 +28,7 @@ const App = () => {
   const apiKey = "AIzaSyBcVWGbWToIhZKuA7yOnCWtDzuIyXi_mnI";
   const mensajesRef = useRef(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
-  
+
   const handleSugerenciaClick = (sugerencia) => {
     setInputContent(sugerencia);
   };
@@ -124,7 +125,7 @@ const App = () => {
   return (
     <div>
       <ChatCircleButton onClick={toggleChat}>Chat</ChatCircleButton>
-      <Contenedor isOpen={isChatOpen}>
+      <ContenedorRicardo isOpen={isChatOpen}>
         <Titulo>Asistente Chatbot</Titulo>
         <MensajesContainer ref={mensajesRef}>
           {messages.map((message, index) => (
@@ -142,9 +143,9 @@ const App = () => {
             onChange={handleInputChange}
             placeholder='Escribe tu pregunta...'
           />
-          <ButtonSubmit type="submit" loading={isGenerating}>
+          <ButtonSubmitR type="submit" loading={isGenerating}>
             {isGenerating ? <LoadingDots /> : 'Preguntar'}
-          </ButtonSubmit>
+          </ButtonSubmitR>
         </Formulario>
         <TituloSugerencia>Preguntas frecuentes</TituloSugerencia>
         <SugerenciasContainer>
@@ -156,9 +157,9 @@ const App = () => {
         </SugerenciasContainer>
         <LimpiarChatButton onClick={handleLimpiarChat}>Limpiar Chat</LimpiarChatButton>
         <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-      </Contenedor>
+      </ContenedorRicardo>
     </div>
   );
 };
 
-export default App;
+export default ChatBot;
