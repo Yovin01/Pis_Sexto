@@ -1,6 +1,6 @@
 import styled, {keyframes} from 'styled-components';
 // Componente de estilo para el contenedor principal
-export const ContenedorRicardo = styled.div`
+export const Contenedor = styled.div`
   max-width: 400px;
   max-height: 650px;
   margin: 0 auto;
@@ -66,7 +66,7 @@ export const TituloSugerencia = styled.h1`
 export const Mensaje = styled.div`
 margin-rigth: ${({ type }) => (type === 'answer' ? 'auto' : 'none')};
 margin-left: ${({ type }) => (type === 'question' ? 'auto' : 'none')};
-background-color: ${({ type }) => (type === 'question' ? '#3498db' : '#4caf50')};
+background-color: ${({ type }) => (type === 'question' ? '#3498db' : '#669C2B')};
 color: ${({ type }) => (type === 'answer' ? 'white' : 'black')};
 border-radius: 8px;
 padding: 5px;
@@ -98,7 +98,7 @@ export const InputText = styled.input`
 `;
 
 // Componente de estilo para el botón de envío
-export const ButtonSubmitR = styled.button`
+export const ButtonSubmit = styled.button`
   padding: 10px 20px;
   background-color: #3498db;
   color: #fff;
@@ -146,8 +146,8 @@ export const SugerenciasContainer = styled.div`
 
 export const SugerenciaButton = styled.button`
   padding: 5px;
-  background-color: #724483; /* Cambia a verde */
-  color: #ffff;
+  background-color: #e4e4e4; /* Cambia a verde */
+  color: #000;
   border: none;
   border-radius: 5px;
   cursor: pointer;

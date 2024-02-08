@@ -3,13 +3,13 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Slide } from 'react-awesome-reveal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {ContenedorRicardo, ChatCircleButton,
+import {Contenedor, ChatCircleButton,
   Titulo,
   MensajesContainer,
   Mensaje,
   Formulario,
   InputText,
-  ButtonSubmitR,
+  ButtonSubmit,
   LoadingDots,
   TituloSugerencia,
   SugerenciasContainer,
@@ -125,7 +125,7 @@ const ChatBot = () => {
   return (
     <div>
       <ChatCircleButton onClick={toggleChat}>Chat</ChatCircleButton>
-      <ContenedorRicardo isOpen={isChatOpen}>
+      <Contenedor isOpen={isChatOpen}>
         <Titulo>Asistente Chatbot</Titulo>
         <MensajesContainer ref={mensajesRef}>
           {messages.map((message, index) => (
@@ -143,9 +143,9 @@ const ChatBot = () => {
             onChange={handleInputChange}
             placeholder='Escribe tu pregunta...'
           />
-          <ButtonSubmitR type="submit" loading={isGenerating}>
+          <ButtonSubmit type="submit" loading={isGenerating}>
             {isGenerating ? <LoadingDots /> : 'Preguntar'}
-          </ButtonSubmitR>
+          </ButtonSubmit>
         </Formulario>
         <TituloSugerencia>Preguntas frecuentes</TituloSugerencia>
         <SugerenciasContainer>
@@ -157,7 +157,7 @@ const ChatBot = () => {
         </SugerenciasContainer>
         <LimpiarChatButton onClick={handleLimpiarChat}>Limpiar Chat</LimpiarChatButton>
         <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-      </ContenedorRicardo>
+      </Contenedor>
     </div>
   );
 };

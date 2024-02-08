@@ -10,18 +10,11 @@ const VerPeticion = () => {
     const [bucle, setBucle] = useState(false);
     if (!bucle) {
         //getMateria
-        metodoGet("/listar/peticiones", "null", "null").then((info) => {
+        metodoGet("/listar/peticiones", "null").then((info) => {
             console.log(info);
             if (info.code !== 200 && (info.msg === "No existe token" || info.msg === "Token no valido")) {
                 mensajes(info.msg);
             } else {
-                /** var datos = {
-                     "correo": info.info.cuentum.correo,
-                     "peticion": info.info.peticion,
-                     "nombre": info.info.cuentum.persona.nombres+" "+ info.info.cuentum.persona.apellidos,
-                     "external_id": info.info.external_id,
-                     "fecha":info.info.createdAt
-                 }; */
                 console.log(info.info);
                 setBucle(true);
                 setPeticiones(info.info);
