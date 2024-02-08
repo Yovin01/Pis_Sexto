@@ -9,7 +9,7 @@ import {ContenedorRicardo, ChatCircleButton,
   Mensaje,
   Formulario,
   InputText,
-  ButtonSubmit,
+  ButtonSubmitR,
   LoadingDots,
   TituloSugerencia,
   SugerenciasContainer,
@@ -143,9 +143,9 @@ const ChatBot = () => {
             onChange={handleInputChange}
             placeholder='Escribe tu pregunta...'
           />
-          <ButtonSubmit type="submit" loading={isGenerating}>
+          <ButtonSubmitR type="submit" loading={isGenerating}>
             {isGenerating ? <LoadingDots /> : 'Preguntar'}
-          </ButtonSubmit>
+          </ButtonSubmitR>
         </Formulario>
         <TituloSugerencia>Preguntas frecuentes</TituloSugerencia>
         <SugerenciasContainer>

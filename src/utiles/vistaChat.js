@@ -98,7 +98,7 @@ export const InputText = styled.input`
 `;
 
 // Componente de estilo para el botón de envío
-export const ButtonSubmit = styled.button`
+export const ButtonSubmitR = styled.button`
   padding: 10px 20px;
   background-color: #3498db;
   color: #fff;

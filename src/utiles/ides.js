@@ -15,3 +15,20 @@ export const eliminarID = () => {
     localStorage.removeItem('id');
     localStorage.removeItem('uno');
 };
+
+export const guadarUVP = (uvp) => {
+    localStorage.setItem('uvp',uvp);
+};
+
+export const guadarUVD = (uvp) => {
+    localStorage.setItem('uvd',uvp);
+};
+
+export const getUVP = () => {
+    return localStorage.getItem('uvp');
+};
+
+export const getUVD = () => {
+    return localStorage.getItem('uvd');
+};
+
