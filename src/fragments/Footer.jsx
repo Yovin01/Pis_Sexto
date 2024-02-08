@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../css/footerstyle.css'; 
 
+
 const Footer = () => {
     return (
         <div className="footerContainer">

@@ -8,6 +8,7 @@ import Api from './fragments/Api';
 import PrincipalUsuario from './fragments/PrincipalUsuario';
 import UsuariosRegistrados from './fragments/UsuariosRegistrados';
 import Perfil from './fragments/Perfil';
+import Contactos from './fragments/Contactos';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/api' element={<Api />} />
         <Route path='/usuariosregistrados' element={<UsuariosRegistrados />} />
         <Route path='/perfil' element={<Perfil />} />
+        <Route path='/contactos' element={<Contactos />} />
       </Routes>
 
     </div>

@@ -42,8 +42,6 @@ const UsuariosRegistrados = () => {
         return `${year}-${month}-${day}`;
     };
 
-    console.log(data);
-
     const usuariosFiltrados = data.filter(usuario => 
         usuario.persona_rol.length > 0 && usuario.persona_rol[0].rol.nombre !== "ADMINISTRADOR"
     );
