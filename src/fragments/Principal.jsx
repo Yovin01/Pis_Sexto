@@ -95,7 +95,7 @@ const Principal = () => {
               nombre,
             };
           });
-      
+
           const medicionesPorDispositivo = _.groupBy(medicionesConNombres, 'dispositivoId');
           const promediosPorDispositivo = _.map(medicionesPorDispositivo, (mediciones, dispositivoId) => ({
             dispositivoId,
@@ -155,34 +155,34 @@ const Principal = () => {
                     </ul>
                   </div>
                   <div className="row">
-                  <div className='row'>
-        {pDisp.map((dispositivo) => (
-          <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6 mb-2'>
-            <div className="panel panel-default " style={{ height: 70 }}>
-              <div className="card">
-                <ul className="list-unstyled card-body mb-2 pb-2">
-                  <li key={dispositivo.dispositivoId} className="row mb-3">
-                    <h5 className="card-header" style={{ maxHeight: '2em', overflow: 'auto' }}>{dispositivo.nombre}</h5>
-                    <div className="col-6">{Math.round((dispositivo.promedioUV) * 100) / 100}</div>
-                    <div className="col-7 align-self-center">
-                      <div className="progress" style={{ height: '5px' }}>
-                        <div
-                          className={`progress-bar ${getColorByUVValue(dispositivo.promedioUV)}`}
-                          role="progressbar"
-                          style={{ width: `${dispositivo.promedioUV * 100 / 15}%` }}
-                          aria-valuenow="15"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
+                    <div className='row'>
+                      {pDisp.map((dispositivo) => (
+                        <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6 mb-2'>
+                          <div className="panel panel-default " style={{ height: 70 }}>
+                            <div className="card">
+                              <ul className="list-unstyled card-body mb-2 pb-2">
+                                <li key={dispositivo.dispositivoId} className="row mb-3">
+                                  <h5 className="card-header" style={{ maxHeight: '2em', overflow: 'auto' }}>{dispositivo.nombre}</h5>
+                                  <div className="col-6">{Math.round((dispositivo.promedioUV) * 100) / 100}</div>
+                                  <div className="col-7 align-self-center">
+                                    <div className="progress" style={{ height: '5px' }}>
+                                      <div
+                                        className={`progress-bar ${getColorByUVValue(dispositivo.promedioUV)}`}
+                                        role="progressbar"
+                                        style={{ width: `${dispositivo.promedioUV * 100 / 15}%` }}
+                                        aria-valuenow="15"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                      ></div>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
                   </div>
                 </div>
               </div>
