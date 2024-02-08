@@ -85,7 +85,7 @@ const Login = () => {
                                         },
                                         pattern: {
                                             value: /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/,
-                                            message: "Correo no válido"
+                                            message: "Ingrese un correo válido"
                                         }
                                     })}
                                     onFocus={() => handleFocus('correo')}
