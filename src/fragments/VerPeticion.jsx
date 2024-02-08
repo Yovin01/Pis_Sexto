@@ -54,6 +54,7 @@ const VerPeticion = () => {
                 if (info.code !== 200 && (info.msg === "No existe token" || info.msg === "Token no valido")) {
                     mensajes(info.msg);
                 } else {
+                    mensajes(info.msg);
                     console.log(info.info);
                 }
             })
