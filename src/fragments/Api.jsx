@@ -1,102 +1,179 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../css/joanstyle.css';
+import '../css/apiStyle.css';
 import Prism from 'prismjs';
+import BarraMenu from './BarraMenu';
+import Footer from './Footer';
+
 
 const Api = () => {
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/todos/1')
-          .then((response) => response.json())
-          .then((json) => console.log(json));
-      }, []);
-      var result = document.getElementById('result')
 
-      const handleRunScript = () => {
-        // Check if the result and runMessage elements exist before manipulating them
-        const resultElement = document.getElementById('result');
-        const runMessageElement = document.getElementById('run-message');
-    
-        if (resultElement && runMessageElement) {
-          //var root = location.protocol + '//jsonplaceholder.typicode.com';
-          
-          fetch('https://jsonplaceholder.typicode.com/posts')
-            .then((response) => response.json())
-            .then((json) => {
-              var str = JSON.stringify(json, null, '  ');
-    
-              // Format result
-              resultElement.innerHTML = Prism.highlight(
-                str,
-                Prism.languages.javascript,
-                'javascript'
-              );
-    
-              // Show run message
-              runMessageElement.className = '';
-            })
-            .catch((error) => {
-              console.error('Error fetching data:', error);
-              // You can handle errors or update UI accordingly
-            });
-        } else {
-          console.error("Either 'result' or 'run-message' element is not found in the DOM.");
-        }
+  const [fechaInicio, setFechaInicio] = useState('');
+  const [fechaFin, setFechaFin] = useState('');
+  const [resultado, setResultado] = useState({});
+  const [mensaje, setMensaje] = useState('');
+  const [consolaActiva, setConsolaActiva] = useState('');
+
+  // Función para manejar las peticiones POST y GET
+  const ejecutarPeticion = (tipo, endpoint) => {
+    const url = `https://computacion.unl.edu.ec/uv/api/${endpoint}`;
+    let opciones = {};
+
+    if (tipo === 'POST') {
+      opciones = {
+        method: tipo,
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJCQUNLRU5EIiwiaWF0IjoxNzA3MzU0OTc5fQ.1t8MKkzaD9_ldyWdfsBFwcdM3mP05VtvU2-CurNX1Jk',
+        },
+        body: JSON.stringify({
+          fechaInicio,
+          fechaFin,
+        }),
       };
-      
-    return (
+    } else {
+      opciones = {
+        method: tipo,
+      };
+    }
+
+    fetch(url, opciones)
+      .then((response) => response.json())
+      .then((data) => {
+        setResultado({ ...resultado, [endpoint]: data });
+        setMensaje("Petición ejecutada con éxito !!! 😃 🎉");
+      })
+      .catch((error) => {
+        console.error('Error en la petición:', error);
+        setMensaje("Error al ejecutar la petición");
+      });
+
+    setConsolaActiva(endpoint);
+  };
+
+  // Función para renderizar los resultados
+  const renderizarResultados = () => {
+    return Object.entries(resultado).map(([key, value]) => (
+      <div key={key} className={`containerConsola ${consolaActiva === key ? 'active' : ''}`}>
+        <pre className="language-javascript">
+          <code className="language-javascript">
+            {JSON.stringify(value, null, 2)}
+          </code>
+        </pre>
+      </div>
+    ));
+  };
+
+
+  return (
+    <div>
+      <BarraMenu />
+      <div className='containerTitulos'>
+        <h2 className="text-2xl mb-one">API de Radiación Ultravioleta</h2>
+        <p>Ejecuta las peticiones, en consola o desde cualquier sitio:</p>
+      </div>
+
+      {/* Formulario para las fechas de las peticiones POST */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-            <div className='container mx-auto max-w-4xl mb-four'>
-                <h2 className="text-2xl mb-one">Prueba Nuestra API</h2>
-                <p>Ejecuta este código aquí, en una consola o desde cualquier sitio:</p>
-                <pre className="language-javascript">
-                    <code id="example" className="language-javascript">
-                        <span className="token function">fetch</span>
-                        <span className="token punctuation">('https://jsonplaceholder.typicode.com/todos/1')</span>
-                        <span className="token punctuation">.</span>
-                        <span className="token function">then</span>
-                        <span className="token punctuation">(</span>
-                        <span className="token parameter">response</span> <span className="token operator"></span> response
-                        <span className="token punctuation">.</span>
-                        <span className="token function">json</span>
-                        <span className="token punctuation">()</span>
-                        <span className="token punctuation">)</span>
-                        <span className="token punctuation">.</span>
-                        <span className="token function">then</span>
-                        <span className="token punctuation">(</span>
-                        <span className="token parameter">json</span> <span className="token operator"></span> console
-                        <span className="token punctuation">.</span>
-                        <span className="token function">log</span>
-                        <span className="token punctuation">(</span>json<span className="token punctuation">)</span>
-                        <span className="token punctuation">)</span>
-                    </code>
-                </pre>
-                <button
-                    id="run-button"
-                    className="
-          bg-green-500
-          hover:bg-green-700
-          text-white
-          font-bold
-          py-quarter
-          my-quarter
-          px-4
-          rounded
-        "
-                    onClick={handleRunScript}
-                >
-                    Run script
-                </button>
-                <pre className="language-javascript">
-                    <code id="result" className="language-javascript">
-                        {'{}'}
-                    </code>
-                </pre>
-                <p id="run-message" className="invisible">
-                    Felicitaciones has hecho tu primera llamada a SolarUV API!!! 😃 🎉
-                </p>
-                
+          <h2 className="text-lg font-semibold mb-2">
+            PETICIONES POST
+          </h2>
+          <div className="border p-4 rounded space-y-4">
+            <div className="flex gap-2 items-center">
+              <label className="flex-grow" htmlFor="fecha-inicio">Fecha de inicio</label>
+              <input
+                type="date"
+                value={fechaInicio}
+                onChange={(e) => setFechaInicio(e.target.value)}
+                placeholder="Fecha de inicio"
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-grow"
+              />
             </div>
+
+            <div className="flex gap-2 items-center">
+              <label className='fecha'>Fecha de fin</label>
+              <input
+                type="date"
+                value={fechaFin}
+                onChange={(e) => setFechaFin(e.target.value)}
+                placeholder="Fecha de fin"
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-grow"
+              />
+            </div>
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label className='titleFech'>
+                Medición por fechas
+              </label>
+              <button onClick={() => ejecutarPeticion('POST', 'medicionFechas')} className="btn"><i class='bx bx-right-arrow'></i></button>
+            </div>
+
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label htmlFor="">
+                Medición por semana
+                <button onClick={() => ejecutarPeticion('POST', 'medicionSemana')} className="btn"><i class='bx bx-right-arrow'></i></button>
+              </label>
+            </div>
+
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label htmlFor="">
+                Medición por día
+                <button onClick={() => ejecutarPeticion('POST', 'medicionDia')} className="btn"><i class='bx bx-right-arrow'></i></button>
+              </label>
+            </div>
+          </div>
         </div>
-    );
+
+
+
+        {/* Botones para las peticiones GET */}
+        <div>
+          <h2 className="text-lg font-semibold mb-2">
+            PETICIONES GET
+          </h2>
+          <div className="border p-4 rounded space-y-4">
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label>
+                Medición promedio
+              </label>
+              <button onClick={() => ejecutarPeticion('GET', 'medicionPromedio')} className="btn"> <i class='bx bx-right-arrow'></i></button>
+            </div>
+
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label>
+                Medición por dispositivos
+              </label>
+              <button onClick={() => ejecutarPeticion('GET', 'medicionDispositivos')} className="btn"><i class='bx bx-right-arrow'></i></button>
+            </div>
+
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label>
+                Activos
+              </label>
+              <button onClick={() => ejecutarPeticion('GET', 'activos')} className="btn"><i class='bx bx-right-arrow'></i></button>
+            </div>
+
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label>
+                Listar dispositivos
+              </label>
+              <button onClick={() => ejecutarPeticion('GET', 'listar')} className="btn"><i class='bx bx-right-arrow'></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contenedor para mensajes */}
+      <div className='containerPeticiones'>
+        {mensaje && <p id="run-message" className="message">{mensaje}</p>}
+      </div>
+
+      <section className='grid grid-cols-1 gap-6'>
+        {/* Contenedores para mostrar los resultados de las peticiones */}
+        {renderizarResultados()}
+      </section>
+    </div>
+  );
 };
 
 
