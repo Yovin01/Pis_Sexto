@@ -1,206 +1,220 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/garystyle.css';
-
-import imagen1 from '../Recursos/Imagenes/listados.jpg';
-import imagen2 from '../Recursos/Imagenes/vacio.png';
-import imagen3 from '../Recursos/Imagenes/4_1.png';
-import imagen4 from '../Recursos/Imagenes/4_3.png';
+import Header from './Header';
+import _ from 'lodash';
 import { useEffect } from 'react';
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css'; 
-
+import 'leaflet/dist/leaflet.css';
+import Grafica from './Grafica';
+import customMarkerImage from '../img/puntoUbi/map-pin3.png';
+import ChatBot from './ChatBot';
+import { getUVD, getUVP } from '../utiles/ides';
+import mensajes from '../utiles/Mensajes';
+import { getAPI, postAPI } from '../hooks/Conexion';
 const Principal = () => {
+  const [dispositivos, setDispositivos] = useState([]);
+  const [pdispos, setPdispos] = useState([]);
+  const [pDisp, setPDispo] = useState([]);
+  const [bucle, setBucle] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Coordenadas del mapa
-    var map = L.map('map').setView([-4.0079, -79.2115], 14);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    const cargarMapa = async () => {
+      // Coordenadas del mapa
+      var map = L.map('map', { attributionControl: false }).setView([-4.0079, -79.2115], 14);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+      // Icono personalizado con imagen local
+      var customIcon = L.divIcon({
+        className: 'custom-marker',
+        html: `<div class="marker-container"><img src="${customMarkerImage}" alt="Marcador"></div>`
+      });
+
+      try {
+        const info = await getAPI("null", '/listar');
+
+        if (info.code !== 200 && (info.msg === "No existe token" || info.msg === "Token no valido")) {
+          mensajes(info.msg);
+        } else {
+          console.log(info.dispositivos);
+          setBucle(true);
+          setDispositivos(info.dispositivos);
+          // Marcadores
+          info.dispositivos.forEach((dispositivo) => {
+            var marker = L.marker([dispositivo.latitud, dispositivo.longitud], {
+              icon: customIcon,
+            }).addTo(map);
+
+            marker.bindPopup(dispositivo.nombre).openPopup();
+          });
+        }
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+      }
+    };
+    const cargarDatos = async () => {
+      try {
+        const obtenerFechaHoyEcuador = () => {
+          const fechaHoy = new Date();
+          fechaHoy.setUTCHours(fechaHoy.getUTCHours() - 5); // Restar 5 horas para ajustar a GMT-5 (Ecuador)
+          return fechaHoy.toISOString().split('T')[0];
+        };
+
+        const obtenerFechaMananaEcuador = () => {
+          const fechaManana = new Date();
+          fechaManana.setDate(fechaManana.getDate() + 1); // Sumar 1 día para obtener mañana
+          fechaManana.setUTCHours(fechaManana.getUTCHours() - 5); // Restar 5 horas para ajustar a GMT-5 (Ecuador)
+          return fechaManana.toISOString().split('T')[0];
+        };
+
+        const data = {
+          'fechaInicio': obtenerFechaHoyEcuador(),
+          'fechaFin': obtenerFechaMananaEcuador()
+        };
+
+        const [mediciones, info] = await Promise.all([
+          postAPI(data, "medicionFechas", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJCQUNLRU5EIiwiaWF0IjoxNzA3MDc2NzkyfQ.xT3uhWgUbCsCFmPepyiGQOUIsdzetlfgrHvdGqKr-Iw"),
+          getAPI("null", '/listar')
+        ]);
+
+        if (info.code !== 200 && (info.msg === "No existe token" || info.msg === "Token no valido")) {
+          mensajes(info.msg);
+        } else {
+
+          const dispositivosConId = info.dispositivos.map((dispositivo, index) => ({
+            ...dispositivo,
+            id: index + 1, // Asumiendo que los índices comienzan desde 0, puedes ajustarlo según tus necesidades
+          }));
+          setDispositivos(dispositivosConId);
+          const medicionesConNombres = mediciones.mediciones.map(medicion => {
+            const dispositivo = dispositivosConId.find(d => d.id === medicion.dispositivoId);
+            const nombre = dispositivo ? dispositivo.nombre : 'Sin Nombre'; // Puedes cambiar el valor predeterminado según tu necesidad
+            return {
+              ...medicion,
+              nombre,
+            };
+          });
+
+          const medicionesPorDispositivo = _.groupBy(medicionesConNombres, 'dispositivoId');
+          const promediosPorDispositivo = _.map(medicionesPorDispositivo, (mediciones, dispositivoId) => ({
+            dispositivoId,
+            promedioUV: _.meanBy(mediciones, 'uv'),
+            nombre: mediciones[0].nombre,
+          }));
+          await setPDispo(promediosPorDispositivo);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+      }
+    };
+    cargarMapa();
+    cargarDatos();
   }, []);
-  
+
+  const getColorByUVValue = (uvValue) => {
+    if (uvValue >= 0 && uvValue <= 3) {
+      return 'bg-success'; // Verde
+    } else if (uvValue > 3 && uvValue <= 6) {
+      return 'bg-warning'; // Amarillo
+    } else if (uvValue > 6 && uvValue <= 8) {
+      return 'bg-warning'; // Naranja
+    } else if (uvValue > 8 && uvValue <= 11) {
+      return 'bg-danger'; // Rojo
+    } else {
+      return 'bg-danger'; // Morado para valores mayores a 11
+    }
+  };
+
+
   return (
-    <div className="container-fluid">
-      {/* cabecera de la pagina */}
-     
-    
+    <div>
+      <Header />
+      <div className='backgroundGary'></div>
+      <div className="containerGary">
 
-      {/* Barra de informacion de la estacion seleccionada */}
-      <div className="row">
+        <dir className="contentGary">
+          <dir className="row"  >
 
-      <div className="est_etiquetasNormalesBlancas18">
-      [ UNIVERSIDAD NACIONAL DE LOJA ] --- [ ECUADOR - LOJA  ]
-    </div>
-     
-      </div>
+            <div className="row">
+              {/* contenedoor del dato de indice UV */}
+              <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4">
 
-      <br />
+                <div className="panel panel-default" style={{ height: 350 }}>
+                  <div className="panel-heading text-center">Indice UV promedio</div>
 
-      <div className="row">
-        <div className="col-xs-12 col-sm-7 col-md-8 col-lg-9">
-          <div className="row">
-            {/* contenedoor del dato de indice UV */}
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-              
-              <div className="panel panel-default" style={{ height: 350 }}>
-                <div className="panel-heading text-center">Precauciones a tener</div>
-
-                <div className="panel-body">
-                 <p>RECOMENDACIÓN:</p>
-                 <img src={imagen1} alt="test" height={40} />
-                 
-                 <p>Mantengase a la sombra durante las horas centrales del dia Pongase camiseta, crema de proteccion solar y sombrero</p>
-              </div>
-
-                
-              </div>
-
-              <div className="panel panel-default" style={{ height: 130 }}>
-                <div className="panel-heading text-center">Login históricos</div>
-                <div className="panel-body">
+                  <div className="card">
+                    <h5 className="card-header">Indice UV promedio del dia</h5>
+                    <ul className="list-unstyled card-body mb-0 pb-0">
+                      <li className="row mb-3">
+                        <div className="progress mb-3">
+                          <div className={`progress-bar ${getColorByUVValue(getUVP())}`} role="progressbar" style={{ width: `${getUVP() * 100 / 15}%` }} aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"> {Math.round((getUVP()) * 100) / 100}</div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
                   <div className="row">
-                    <div className="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                      <div className="row form-group">
-                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <input style={{ height: 20, width: "100%" }} className="est_etqPequenias2" type="text" id="txt_usuario" placeholder="Usuario:" />
+                    <div className='row'>
+                      {pDisp.map((dispositivo) => (
+                        <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6 mb-2'>
+                          <div className="panel panel-default " style={{ height: 70 }}>
+                            <div className="card">
+                              <ul className="list-unstyled card-body mb-2 pb-2">
+                                <li key={dispositivo.dispositivoId} className="row mb-3">
+                                  <h5 className="card-header" style={{ maxHeight: '2em', overflow: 'auto' }}>{dispositivo.nombre}</h5>
+                                  <div className="col-6">{Math.round((dispositivo.promedioUV) * 100) / 100}</div>
+                                  <div className="col-7 align-self-center">
+                                    <div className="progress" style={{ height: '5px' }}>
+                                      <div
+                                        className={`progress-bar ${getColorByUVValue(dispositivo.promedioUV)}`}
+                                        role="progressbar"
+                                        style={{ width: `${dispositivo.promedioUV * 100 / 15}%` }}
+                                        aria-valuenow="15"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                      ></div>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="row form-group">
-                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <input style={{ height: 20, width: "100%" }} className="est_etqPequenias2" type="password" id="txt_password" placeholder="Password:" />
-                        </div>
-                      </div>
-                      
+                      ))}
                     </div>
-                    
                   </div>
                 </div>
               </div>
+              {/* contenedoor del mapa */}
+              <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                <div className="panel panel-default" style={{ height: 450 }}>
+                  <div className="panel-heading text-center">Ubicación Geográfica</div>
+                  <div id="map" className="est_divContenedorGoogleMpas" style={{ height: 395 }} />
+                </div>
+              </div>
             </div>
+            {/* Histograma de indice UV */}
+            <div className="row">
+              <div className="col-xs-12">
+                <div className="panel panel-default" style={{ height: 350 }}>
+                  <div className="panel-heading text-center">Grafico Histograma</div>
+                  <Grafica />
+                </div>
 
+              </div>
+            </div>
+          </dir>
+          <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        </dir>
 
-            {/* contenedoor del mapa */}
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-              <div className="panel panel-default" style={{ height: 500 }}>
-                <div className="panel-heading text-center">Ubicación Geográfica</div>
-                <div id="map" className="est_divContenedorGoogleMpas" style={{ height: 400 }}/>
-              </div>
-            </div>
-          </div>
-          {/* Histograma de indice UV */}
-          <div className="row">
-            <div className="col-xs-12">
-              <div className="panel panel-default" style={{ height: 350 }}>
-                <div className="panel-heading text-center">Grafico Histograma</div>
-                 
-              </div>
-            </div>
-          </div>
-          {/* Datos historicos del indice UV */}
-          <div className="row">
-            <div className="col-xs-12">
-              <div className="panel panel-default" style={{ height: 250 }}>
-                <div className="panel-heading text-center">Datos Históricos</div>
-                 
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* contenedoor de la barra lateral derecha */}
-        <div className="col-xs-12 col-sm-5 col-md-4 col-lg-3">
-          <div className="panel panel-default">
-            <div className="panel-heading est_etqTitulo text-center">Simbología general</div>
-            <br />
-            <div className="table-responsive">
-              <table className="table table-striped table-bordered table-hover table-condensed" style={{ width: "95%" }} align="center">
-                <tbody>
-                  <tr className="active">
-                    <th className="text-center" colSpan={3}>Categorías de exposición</th>
-                  </tr>
-                  
-                  <tr className="active">
-                    <th className="text-center">Categoria</th>
-                    <th className="text-center">Valores</th>
-                    
-                  </tr>
-                  <tr className="text-center">
-                    <td>Baja</td>
-                    <td>&lt; 2</td>
-                   
-                  </tr>
-                  <tr className="text-center">
-                    <td>Moderada</td>
-                    <td>3 - 5</td>
-                   
-                  </tr>
-                  <tr className="text-center">
-                    <td>Alta</td>
-                    <td>6 - 7</td>
-                   
-                  </tr>
-                  <tr className="text-center">
-                    <td>Muy alta</td>
-                    <td>8 - 10</td>
-                    
-                  </tr>
-                  <tr className="text-center">
-                    <td>Extremadamente alta</td>
-                    <td>11 +</td>
-                   
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <br />
-            <div className="table-responsive">
-              <table className="table table-striped table-bordered table-hover table-condensed" style={{ width: "95%" }} align="center">
-                <tbody>
-                  <tr className="active">
-                    <th className="text-center" colSpan={2}>Tabla de recomendaciones</th>
-                  </tr>
-                  
-                  <tr className="active">
-                    <th className="text-center" colSpan={2}>Indice [ 1 - 2 ]</th>
-                  </tr>
-                  <tr className="text-center">
-                    <td>
-                    <img src={imagen2} alt="test" height={40} />
-                    </td>
-                    <td>Puede permanecer en el exterior sin riesgos.</td>
-                  </tr>
-                  {/*<tr ><td colspan="2" >&nbsp;</td></tr>*/}
-                  <tr className="active">
-                    <th colSpan={2} className="text-center">Indice [ 3 - 7 ]</th>
-                  </tr>
-                  <tr className="text-center">
-                    <td>
-                    <img src={imagen3} alt="test" height={40} />
-                    </td>
-                    <td>Pongase camisa, crema de proteccion solar, sombrero y gafas de sol</td>
-                  </tr>
-                  {/*<tr ><td colspan="2" >&nbsp;</td></tr>*/}
-                  <tr className="active">
-                    <th colSpan={2} className="text-center">Indice [ 8+ ]</th>
-                  </tr>
-                  <tr className="text-center">
-                    <td>
-                    <img src={imagen3} alt="test" height={40} />
-                    </td>
-                    <td rowSpan={2}>Son imprescindibles camisa, crema de proteccion solar, sombrero y gafas de sol</td>
-                  </tr>
-                  <tr className="text-center">
-                    <td>
-                    <img src={imagen4} alt="test" height={40} />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
       </div>
-      <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+      <ChatBot />
+
     </div>
+
   );
 };
 
+ 
 export default Principal;
-

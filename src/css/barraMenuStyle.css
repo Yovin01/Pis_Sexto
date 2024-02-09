@@ -38,8 +38,8 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255,4), transparent);
-    transition: 0.5s;
+    /*background: linear-gradient(50deg, transparent,  rgb(190, 190, 190), transparent);
+    transition: 0.8s;*/
 }
 
 .header1:hover::after{

@@ -22,9 +22,10 @@ const Header = () => {
         <i className='bx bx-x' id='close-icon'></i>
       </label>
       <nav className='navbar'>
-        <a href="#" >Home</a>
+        <a href="/principal" >Home</a>
+        <a href="/login">Login</a>
         <a href="#">Sobre el API</a>
-        <a href="#">Contactos</a>
+        <a href="/contactos">Contactos</a>
       </nav>
 
       {/** <form action="#" className="search-bar">
