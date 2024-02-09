@@ -2,7 +2,7 @@ import styled, {keyframes} from 'styled-components';
 // Componente de estilo para el contenedor principal
 export const Contenedor = styled.div`
   max-width: 400px;
-  max-height: 650px;
+  max-height: 700px;
   margin: 0 auto;
   padding: 20px;
   background-color: #0C2840;
@@ -70,6 +70,7 @@ background-color: ${({ type }) => (type === 'question' ? '#3498db' : '#669C2B')}
 color: ${({ type }) => (type === 'answer' ? 'white' : 'black')};
 border-radius: 8px;
 padding: 5px;
+font-size: 13px;
 margin-bottom: 10px;
 max-width: 70%;
 width: fit-content;
@@ -85,6 +86,7 @@ export const Formulario = styled.form`
 export const InputText = styled.input`
   flex: 1;
   padding: 10px;
+  max-width: 200px;
   border: 1px solid #ddd;
   border-radius: 5px;
   margin-right: 10px;
@@ -129,7 +131,7 @@ export const LoadingDots = styled.div`
   }
 `;
 export const MensajesContainer = styled.div`
-  max-width: 400px;
+  max-width: 500px;
   overflow-y: auto;
   background-color: #f5f5f5;
   border-radius: 8px;
@@ -145,10 +147,9 @@ export const SugerenciasContainer = styled.div`
 `;
 
 export const SugerenciaButton = styled.button`
-  padding: 5px;
   background-color: #e4e4e4; /* Cambia a verde */
   color: #000;
-  border: none;
+  font-size: 12px;
   border-radius: 5px;
   cursor: pointer;
   transition: margin-top 0.5s; /* Agregamos una transición para suavizar el desplazamiento */
