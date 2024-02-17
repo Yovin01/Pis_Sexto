@@ -29,6 +29,7 @@ const ChatBot = () => {
   const mensajesRef = useRef(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
 
+
   const handleSugerenciaClick = (sugerencia) => {
     setInputContent(sugerencia);
   };
@@ -42,7 +43,18 @@ const ChatBot = () => {
       console.error('Por favor, ingrese la api key');
       return;
     }
+    
     setIsGenerating(true);
+    const isGreeting = checkIfGreeting(inputContent);
+    if (isGreeting) {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: 'answer', content: '¡Hola! Soy un chatbot diseñado para proporcionarte información sobre los rayos UV. ¿Qué te gustaría saber hoy?' },
+      ]);
+      setIsGenerating(false);
+      setInputContent('');
+      return;
+    }
 
     const isRelatedToUV = checkIfRelatedToUV(inputContent);
 
@@ -60,7 +72,7 @@ const ChatBot = () => {
         const response = await result.response;
         text = await response.text();
 
-        // Puedes eliminar el mensaje " (limit: 30 words)" de la respuesta final si lo deseas
+        // Puedes eliminar el mensaje " (limit: 50 words)" de la respuesta final si lo deseas
         text = text.replace(' (limit: 50 words)', '');
       } else {
         text = generateOptionsForUV();
@@ -85,6 +97,11 @@ const ChatBot = () => {
   const checkIfRelatedToUV = (question) => {
     const uvKeywords = ['UV', 'radiación UV', 'rayos UV', 'índice UV', 'rayos ultravioleta', 'protección solar', 'uv enfermedades'];
     return uvKeywords.some(keyword => question.toLowerCase().includes(keyword.toLowerCase()));
+  };
+
+  const checkIfGreeting = (question) => {
+    const greetings = ['hola', 'cómo estas', 'buenos dias', 'buenas tardes', 'buenas noches'];
+    return greetings.some(greeting => question.toLowerCase().includes(greeting.toLowerCase()));
   };
 
   const generateOptionsForUV = () => {
