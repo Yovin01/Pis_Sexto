@@ -53,10 +53,10 @@ const Contactos = () => {
                                                 <label for="message" className="form-label" style={{ fontWeight: 'bold' }}>Developer team</label>
                                                 <ul style={{paddingLeft:'30px'}}>
                                                     <li style={{listStyleType:'disc'}}>Hilary Madeley Calva Camacho (hilary.calva@unl.edu.ec)</li>
-                                                    <li style={{listStyleType:'disc'}}>Ricardo Alejandro Castro Sarmiento</li>
-                                                    <li style={{listStyleType:'disc'}}>Gari Roberto Coronel Lojan</li>
-                                                    <li style={{listStyleType:'disc'}}>Joan Daniel Riofrío Bustamante</li>
-                                                    <li style={{listStyleType:'disc'}}>Yovin Stiven Urrrego Gomez</li>
+                                                    <li style={{listStyleType:'disc'}}>Ricardo Alejandro Castro Sarmiento (ricardo.castro@unl.edu.ec)</li>
+                                                    <li style={{listStyleType:'disc'}}>Gari Roberto Coronel Lojan (gari.coronel@unl.edu.ec)</li>
+                                                    <li style={{listStyleType:'disc'}}>Joan Daniel Riofrío Bustamante (joan.riofrio@unl.edu.ec)</li>
+                                                    <li style={{listStyleType:'disc'}}>Yovin Stiven Urrrego Gomez (yovin.urrego@unl.edu.ec)</li>
                                                 </ul>
                                             </div>
 

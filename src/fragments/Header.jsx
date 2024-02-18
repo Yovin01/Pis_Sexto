@@ -24,7 +24,7 @@ const Header = () => {
       <nav className='navbar'>
         <a href="/principal" >Home</a>
         <a href="/login">Login</a>
-        <a href="#">Sobre el API</a>
+        <a href="/sobreapi">Sobre el API</a>
         <a href="/contactos">Contactos</a>
       </nav>
 

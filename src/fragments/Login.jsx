@@ -59,8 +59,8 @@ const Login = () => {
                 <div className='content'>
                     <h2 className='text'>API RADIACIÓN ULTRAVIOLETA</h2>
                     <div className='text-sci'>
-                        <h2>Bienvenido! <br /> <span>A un enfoque más consciente de la exposición solar en Loja</span></h2>
-                        <p> Nuestra plataforma ha sido diseñada pensando en personas que buscan acceder
+                        <h2 className='textoBienve'>Bienvenido! <br /> <span className='parrafoInfo'>A un enfoque más consciente de la exposición solar en Loja</span></h2>
+                        <p className='parrafo'> Nuestra plataforma ha sido diseñada pensando en personas que buscan acceder
                             a información valiosa sobre los niveles de radiación UV en fechas pasadas. Con nuestra API, ahora es
                             posible explorar y utilizar datos detallados de radiación UV históricos, esta proporcionará acceso a una fuente confiable y completa de información. </p>
 
@@ -111,7 +111,7 @@ const Login = () => {
                                 <label className={focused.clave ? 'active' : ''}>Contraseña</label>
                             </div>
 
-                            <button type='submit' className='btn1'>Ingresar</button>
+                            <button type='submit' className='btnIngresar'>Ingresar</button>
                         </form>
 
                         <div className='login-register'>

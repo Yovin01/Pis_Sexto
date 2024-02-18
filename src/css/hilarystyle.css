@@ -202,19 +202,19 @@
   font-weight: bold;
 }
 
-.text-sci h2{
+.textoBienve{
   font-size: 30px;
   line-height: 1;
   font-weight: bold;
 
 }
 
-.text-sci h2 span{
+.parrafoInfo{
   font-size: 20px;
   
 }
 
-.text-sci p{
+.parrafo{
   font-size: 14px;
   margin: 40px 0;
   text-align: justify;
@@ -230,7 +230,7 @@
   text-decoration: underline;
 }
 
-.btn1{
+.btnIngresar{
   position: relative;
   left: 50%;
   transform: translateX(-50%);

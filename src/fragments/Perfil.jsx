@@ -87,8 +87,8 @@ const Perfil = () => {
                 </div>
             </div>
             <footer class="bg-body-tertiary text-center text-lg-start">
-                <div class="text-center p-3" style={{ color: '#fff', backgroundColor: '#0C2840', marginTop: '205px', height: '50px', textAlign: 'center'}}>
-                    © 2024 Copyright
+                <div class="text-center p-3" style={{ color: '#fff', backgroundColor: '#0C2840', marginTop: '205px', height: '50px', textAlign: 'center' }}>
+                    © 2024 API UV
                 </div>
             </footer>
 
