@@ -30,7 +30,24 @@ body {
   border-radius: 50%;
 }
 
+.gap-6 {
+  gap: 1.5rem;
+}
 
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid {
+  display: grid;
+}
+
+.md\:grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+}
+.w-full {
+  width: 100%;
+}
 .containerGary {
   position: absolute;
   top: 50%;
@@ -109,7 +126,7 @@ body {
 }
 
 .panel-heading {
-  background-color: #4d739c;
+  background-color: #0C2840;
   color: #fff;
   padding: 10px;
 }
@@ -126,7 +143,7 @@ body {
 }
 
 .table th {
-  background-color: #4d739c;
+  background-color: #0C2840;
   color: #fff;
 }
 
@@ -139,14 +156,14 @@ body {
 }
 
 .est_etqTitulo {
-  background-color: #4d739c;
+  background-color: #0C2840;
   color: #fff;
   padding: 10px;
   margin-bottom: 20px;
 }
 
 .est_etiquetasNormalesBlancas18 {
-  background-color: #3E6387;
+  background-color: #0C2840;
   padding: 10px;
   font-size: 18px;
   color: #FFFFFF;

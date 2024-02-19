@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import '../css/garystyle.css';
+import '../css/apiStyle.css';
 import Header from './Header';
 import _ from 'lodash';
 import { useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Grafica from './Grafica';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import customMarkerImage from '../img/puntoUbi/map-pin3.png';
 import ChatBot from './ChatBot';
 import { getUVD, getUVP } from '../utiles/ides';
@@ -112,6 +116,14 @@ const Principal = () => {
     cargarMapa();
     cargarDatos();
   }, []);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+  
 
   const getColorByUVValue = (uvValue) => {
     if (uvValue >= 0 && uvValue <= 3) {
@@ -126,6 +138,72 @@ const Principal = () => {
       return 'bg-danger'; // Morado para valores mayores a 11
     }
   };
+  // Función para determinar las recomendaciones basadas en la medida (getUVP)
+const cards = () => {
+  const measure = getUVP(); // Obtener el valor de medida adecuado, puedes ajustarlo según tu lógica
+
+  if (measure >= 0.0 && measure < 3.0) {
+    return (
+      <div>
+        <h5>Necesita protección mínima</h5>
+        <p>Riesgo: Bajo</p>
+        <h5>Use gafas con filtro UV</h5>
+        <p>Riesgo: Bajo</p>
+      </div>
+    );
+  } else if (measure >= 3.0 && measure < 6.0) {
+    return (
+      <div>
+        <h5>Use gorra o sombrero</h5>
+        <p>Riesgo: Moderado</p>
+        <h5>Use gafas con filtro UV</h5>
+        <p>Riesgo: Moderado</p>
+        <h5>Utilice crema con filtro solar</h5>
+        <p>Riesgo: Moderado</p>
+      </div>
+    );
+  } else if (measure >= 6.0 && measure < 8.0) {
+    return (
+      <div>
+        <h5>Use gorra o sombrero</h5>
+        <p>Riesgo: Alto</p>
+        <h5>Use gafas con filtro UV</h5>
+        <p>Riesgo: Alto</p>
+        <h5>Utilice crema con filtro solar</h5>
+        <p>Riesgo: Alto</p>
+      </div>
+    );
+  } else if (measure >= 8.0 && measure < 11.0) {
+    return (
+      <div>
+        <h5>Use gorra o sombrero</h5>
+        <p>Riesgo: Muy Alto</p>
+        <h5>Use gafas con filtro UV</h5>
+        <p>Riesgo: Muy Alto</p>
+        <h5>Utilice crema con filtro solar</h5>
+        <p>Riesgo: Muy Alto</p>
+        <h5>Procure no exponerse al sol</h5>
+        <p>Riesgo: Muy Alto</p>
+      </div>
+    );
+  } else if (measure >= 11.0 && measure <= 15.0) {
+    return (
+      <div>
+        <h5>Evite la exposición al sol</h5>
+        <p>Riesgo: Extremo</p>
+        <h5>Utilice crema con filtro solar alto SPF 30+</h5>
+        <p>Riesgo: Muy Alto</p>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <h5>Lo sentimos presentamos algunos problemas...</h5>
+      </div>
+    );
+  }
+};
+
 
 
   return (
@@ -141,8 +219,8 @@ const Principal = () => {
               {/* contenedoor del dato de indice UV */}
               <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4">
 
-                <div className="panel panel-default" style={{ height: 350 }}>
-                  <div className="panel-heading text-center">Indice UV promedio</div>
+                <div className="panel panel-default" style={{ height: 350}}>
+                  <div className="panel-heading text-center" >Indice UV promedio</div>
 
                   <div className="card">
                     <h5 className="card-header">Indice UV promedio del dia</h5>
@@ -154,11 +232,11 @@ const Principal = () => {
                       </li>
                     </ul>
                   </div>
-                  <div className="row">
-                    <div className='row'>
+                  <div className="grid grid-cols-1 gap-6">
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                       {pDisp.map((dispositivo) => (
-                        <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6 mb-2'>
-                          <div className="panel panel-default " style={{ height: 70 }}>
+                        <div className="flex gap-2 items-center">
+                          <div  style={{ height: 70 }}>
                             <div className="card">
                               <ul className="list-unstyled card-body mb-2 pb-2">
                                 <li key={dispositivo.dispositivoId} className="row mb-3">
@@ -196,13 +274,34 @@ const Principal = () => {
             </div>
             {/* Histograma de indice UV */}
             <div className="row">
-              <div className="col-xs-12">
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4">
                 <div className="panel panel-default" style={{ height: 350 }}>
-                  <div className="panel-heading text-center">Grafico Histograma</div>
-                  <Grafica />
+                  <div className="panel-heading text-center">Recomendaciones</div>
+                  <div className="card">
+  <div className="card-body">
+    {cards()} {/* Aquí se integran las recomendaciones */}
+  </div>
+</div>
+
                 </div>
 
               </div>
+            
+      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+        <Slider {...settings}>
+          {pDisp.map((dispositivo) => (
+            <div key={dispositivo.dispositivoId}>
+              <div className="panel panel-default" style={{ height: 350 }}>
+                <div className="panel-heading text-center"> {dispositivo.nombre}</div>
+                {/* Pasa el dispositivoId como prop a Grafica */}
+                <Grafica dispositivoId={dispositivo.dispositivoId} />
+              </div>
+            </div>
+          ))}
+        </Slider>
+      </div>
+ 
+            
             </div>
           </dir>
           <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
