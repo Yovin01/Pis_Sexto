@@ -41,7 +41,7 @@ const Api = () => {
       .then((response) => response.json())
       .then((data) => {
         setResultado({ ...resultado, [endpoint]: data });
-        setMensaje("Petición ejecutada con éxito");
+        setMensaje("Petición ejecutada con éxito !!! 😃 🎉");
       })
       .catch((error) => {
         console.error('Error en la petición:', error);
@@ -74,98 +74,104 @@ const Api = () => {
       </div>
 
       {/* Formulario para las fechas de las peticiones POST */}
-      <div className='containerPeticionesPost'>
-        <h2>
-          PETICIONES POST
-        </h2>
-        <label className='fecha'>Fecha de inicio</label>
-        <input
-          type="date"
-          value={fechaInicio}
-          onChange={(e) => setFechaInicio(e.target.value)}
-          placeholder="Fecha de inicio"
-          className="input"
-        />
-
-
-        <label className='fecha'>Fecha de fin</label>
-        <input
-          type="date"
-          value={fechaFin}
-          onChange={(e) => setFechaFin(e.target.value)}
-          placeholder="Fecha de fin"
-          className="input"
-        />
-
-        <div className='medFecha'>
-          <label className='titleFech'>
-            Medición por fechas
-          </label>
-          <button onClick={() => ejecutarPeticion('POST', 'medicionFechas')} className="btn"><i class='bx bx-right-arrow'></i></button>
-        </div>
-
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="">
-            Medición por semana
-            <button onClick={() => ejecutarPeticion('POST', 'medicionSemana')} className="btn"><i class='bx bx-right-arrow'></i></button>
-          </label>
+          <h2 className="text-lg font-semibold mb-2">
+            PETICIONES POST
+          </h2>
+          <div className="border p-4 rounded space-y-4">
+            <div className="flex gap-2 items-center">
+              <label className="flex-grow" htmlFor="fecha-inicio">Fecha de inicio</label>
+              <input
+                type="date"
+                value={fechaInicio}
+                onChange={(e) => setFechaInicio(e.target.value)}
+                placeholder="Fecha de inicio"
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-grow"
+              />
+            </div>
+
+            <div className="flex gap-2 items-center">
+              <label className='fecha'>Fecha de fin</label>
+              <input
+                type="date"
+                value={fechaFin}
+                onChange={(e) => setFechaFin(e.target.value)}
+                placeholder="Fecha de fin"
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-grow"
+              />
+            </div>
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label className='titleFech'>
+                Medición por fechas
+              </label>
+              <button onClick={() => ejecutarPeticion('POST', 'medicionFechas')} className="btn"><i class='bx bx-right-arrow'></i></button>
+            </div>
+
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label htmlFor="">
+                Medición por semana
+                <button onClick={() => ejecutarPeticion('POST', 'medicionSemana')} className="btn"><i class='bx bx-right-arrow'></i></button>
+              </label>
+            </div>
+
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label htmlFor="">
+                Medición por día
+                <button onClick={() => ejecutarPeticion('POST', 'medicionDia')} className="btn"><i class='bx bx-right-arrow'></i></button>
+              </label>
+            </div>
+          </div>
         </div>
 
+
+
+        {/* Botones para las peticiones GET */}
         <div>
-          <label htmlFor="">
-            Medición por día
-            <button onClick={() => ejecutarPeticion('POST', 'medicionDia')} className="btn"><i class='bx bx-right-arrow'></i></button>
-          </label>
+          <h2 className="text-lg font-semibold mb-2">
+            PETICIONES GET
+          </h2>
+          <div className="border p-4 rounded space-y-4">
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label>
+                Medición promedio
+              </label>
+              <button onClick={() => ejecutarPeticion('GET', 'medicionPromedio')} className="btn"> <i class='bx bx-right-arrow'></i></button>
+            </div>
+
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label>
+                Medición por dispositivos
+              </label>
+              <button onClick={() => ejecutarPeticion('GET', 'medicionDispositivos')} className="btn"><i class='bx bx-right-arrow'></i></button>
+            </div>
+
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label>
+                Activos
+              </label>
+              <button onClick={() => ejecutarPeticion('GET', 'activos')} className="btn"><i class='bx bx-right-arrow'></i></button>
+            </div>
+
+            <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium color h-10 px-4 py-2 w-full'>
+              <label>
+                Listar dispositivos
+              </label>
+              <button onClick={() => ejecutarPeticion('GET', 'listar')} className="btn"><i class='bx bx-right-arrow'></i></button>
+            </div>
+          </div>
         </div>
-
-
-      </div>
-
-
-
-      {/* Botones para las peticiones GET */}
-      <div className='containerPeticionesGet'>
-        <h2>
-          PETICIONES GET
-        </h2>
-        <div className='medProm'>
-          <label>
-            Medición promedio
-          </label>
-          <button onClick={() => ejecutarPeticion('GET', 'medicionPromedio')} className="btn"> <i class='bx bx-right-arrow'></i></button>
-        </div>
-
-        <div>
-          <label>
-            Medición por dispositivos
-          </label>
-          <button onClick={() => ejecutarPeticion('GET', 'medicionDispositivos')} className="btn"><i class='bx bx-right-arrow'></i></button>
-        </div>
-
-        <div>
-          <label>
-            Activos
-          </label>
-          <button onClick={() => ejecutarPeticion('GET', 'activos')} className="btn"><i class='bx bx-right-arrow'></i></button>
-        </div>
-
-        <div>
-          <label>
-            Listar dispositivos
-          </label>
-          <button onClick={() => ejecutarPeticion('GET', 'listar')} className="btn"><i class='bx bx-right-arrow'></i></button>
-        </div>
-
-      </div>
+      </section>
 
       {/* Contenedor para mensajes */}
       <div className='containerPeticiones'>
         {mensaje && <p id="run-message" className="message">{mensaje}</p>}
       </div>
 
-      {/* Contenedores para mostrar los resultados de las peticiones */}
-      {renderizarResultados()}
-
+      <section className='grid grid-cols-1 gap-6'>
+        {/* Contenedores para mostrar los resultados de las peticiones */}
+        {renderizarResultados()}
+      </section>
     </div>
   );
 };

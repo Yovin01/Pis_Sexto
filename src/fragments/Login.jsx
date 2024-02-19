@@ -41,8 +41,8 @@ const Login = () => {
                 saveRol(infoAux.rol);
                 saveUser(infoAux.user);
                 saveCorreo(infoAux.correo);
-                navegation("/PrincipalUsuario");
-                mensajes(info.msg);
+                navegation("/principalusuario");
+                mensajes(info.info);
             }
         })
     };
