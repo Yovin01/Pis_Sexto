@@ -51,8 +51,6 @@ class Grafica extends Component {
     }
 
     componentDidMount() {
-        const dispositivoId = parseInt(this.props.dispositivoId, 10);
-        console.log(this.props);
         const data = {
             fechaInicio: obtenerFechaHoyEcuador(),
             fechaFin: obtenerFechaMananaEcuador()
@@ -69,24 +67,11 @@ class Grafica extends Component {
         })
             .then(response => response.json())
             .then(data => {
-
-                const medicionesDispositivo = data.mediciones.filter(
-                    (medicion) => medicion.dispositivoId === dispositivoId
-                  
-                  );
-                  console.log(medicionesDispositivo);
                 // Agrupar las mediciones por hora y calcular el promedio
-                const medicionesPorHora = _.groupBy(
-                    medicionesDispositivo,
-                    (medicion) => {
-                      const fecha = new Date(medicion.fecha);
-                      return (
-                        fecha.getHours() +
-                        ":" +
-                        ("0" + fecha.getMinutes()).slice(-2)
-                      );
-                    }
-                  );
+                const medicionesPorHora = _.groupBy(data.mediciones, medicion => {
+                    const fecha = new Date(medicion.fecha);
+                    return fecha.getHours() + ':' + ('0' + fecha.getMinutes()).slice(-2);
+                });
 
                 const promediosPorHora = _.map(medicionesPorHora, (mediciones, hora) => ({
                     hora,
