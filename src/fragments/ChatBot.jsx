@@ -95,7 +95,7 @@ const ChatBot = () => {
   };
 
   const checkIfRelatedToUV = (question) => {
-    const uvKeywords = ['UV', 'radiación UV', 'rayos UV', 'índice UV', 'rayos ultravioleta', 'protección solar', 'uv enfermedades'];
+    const uvKeywords = ['UV', 'radiación UV', 'rayos UV', 'índice UV', 'rayos ultravioleta', 'protección solar', 'uv enfermedades', 'luz solar', 'cancer'];
     return uvKeywords.some(keyword => question.toLowerCase().includes(keyword.toLowerCase()));
   };
 
