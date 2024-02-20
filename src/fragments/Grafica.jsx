@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
 import _ from 'lodash';
-import { getUVD, getUVP, guadarUVD, guadarUVP } from "../utiles/ides";
-
 const URL = "https://computacion.unl.edu.ec/uv/api/medicionFechas";
 
 const obtenerFechaHoyEcuador = () => {
@@ -116,9 +114,7 @@ class Grafica extends Component {
             //    console.log(promediosPorHora);
                 const horas = promediosValidos.map(item => item.hora);
                 const medicionesUV = promediosValidos.map(item => item.promedioUV);
-                const promedioTotalDia = _.mean(medicionesUV);
-                guadarUVP(getUVP()+ promedioTotalDia);
-                console.log(getUVP());
+               
                 // Actualizar el estado con los datos del gráfico
                 this.setState({
                     options: {

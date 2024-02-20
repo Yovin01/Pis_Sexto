@@ -12,54 +12,19 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import customMarkerImage from '../img/puntoUbi/map-pin3.png';
 import ChatBot from './ChatBot';
-import { getUVD, getUVP, guadarUVD, guadarUVP } from '../utiles/ides';
+import { getUVP, guadarUVP } from '../utiles/ides';
 import mensajes from '../utiles/Mensajes';
 import { getAPI, postAPI } from '../hooks/Conexion';
 
 
 const Principal = () => {
-  const [dispositivos, setDispositivos] = useState([]);
-  const [pdispos, setPdispos] = useState([]);
+  const [dispositivo2, setDispositivo2] = useState([]);
   const [pDisp, setPDispo] = useState([]);
-  const [bucle, setBucle] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const cargarMapa = async () => {
-      // Coordenadas del mapa
-      var map = L.map('map', { attributionControl: false }).setView([-4.0079, -79.2115], 14);
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-      // Icono personalizado con imagen local
-      var customIcon = L.divIcon({
-        className: 'custom-marker',
-        html: `<div class="marker-container"><img src="${customMarkerImage}" alt="Marcador"></div>`
-      });
-
-      try {
-        const info = await getAPI("null", '/activos');
-
-        if (info.code !== 200 && (info.msg === "No existe token" || info.msg === "Token no valido")) {
-          mensajes(info.msg);
-        } else {
-       //   console.log(info.dispositivos);
-          setBucle(true);
-          setDispositivos(info.dispositivos);
-          // Marcadores
-          info.dispositivos.forEach((dispositivo) => {
-            var marker = L.marker([dispositivo.latitud, dispositivo.longitud], {
-              icon: customIcon,
-            }).addTo(map);
-
-            marker.bindPopup(dispositivo.nombre).openPopup();
-          });
-        }
-      } catch (error) {
-        console.error("Error al obtener datos:", error);
-      }
-    };
     const cargarDatos = async () => {
+      
       try {
         const obtenerFechaHoyEcuador = () => {
           const fechaHoy = new Date();
@@ -79,52 +44,44 @@ const Principal = () => {
           'fechaFin': obtenerFechaMananaEcuador()
         };
 
-        const [mediciones, info] = await Promise.all([
+        const [mediciones, info2] = await Promise.all([
           postAPI(data, "medicionFechas", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJCQUNLRU5EIiwiaWF0IjoxNzA3MDc2NzkyfQ.xT3uhWgUbCsCFmPepyiGQOUIsdzetlfgrHvdGqKr-Iw"),
-          getAPI("null", '/activos')
+          getAPI("null", '/medicionDispositivos'),
         ]);
-
-        if (info.code !== 200 && (info.msg === "No existe token" || info.msg === "Token no valido")) {
-          mensajes(info.msg);
+        if (info2.code !== 200 && (info2.msg === "No existe token" || info2.msg === "Token no valido")) {
+          mensajes(info2.msg);
         } else {
-
-          const dispositivosConId = info.dispositivos.map((dispositivo, index) => ({
-            ...dispositivo,
-            id: index + 1, // Asumiendo que los índices comienzan desde 0, puedes ajustarlo según tus necesidades
-          }));
-          setDispositivos(dispositivosConId);
-
           const medicionesFiltradas = mediciones.mediciones.filter(medicion => {
-            const hora = new Date(medicion.fecha).getUTCHours() -5; // Ajustar a GMT-5 (Ecuador)
-            return hora+5 >= 6 && hora+5 <= 17;
-          });
-          console.log(medicionesFiltradas);
-          const medicionesConNombres = medicionesFiltradas.map(medicion => {
-            const dispositivo = dispositivosConId.find(d => d.id === medicion.dispositivoId);
-            const nombre = dispositivo ? dispositivo.nombre : 'Sin Nombre';
-         
-            return {
-              ...medicion,
-              nombre,
-            };
+            const hora = new Date(medicion.fecha).getUTCHours() - 5; // Ajustar a GMT-5 (Ecuador)
+            return hora + 5 >= 6 && hora + 5 <= 17;
           });
 
-          const medicionesPorDispositivo = _.groupBy(medicionesConNombres, 'dispositivoId');
-          const promediosPorDispositivo = _.map(medicionesPorDispositivo, (mediciones, dispositivoId) => ({
-            dispositivoId,
-            promedioUV: _.meanBy(mediciones, 'uv'),
-            nombre: mediciones[0].nombre,
-          }));
-          const promedioTotal = _.meanBy(promediosPorDispositivo, 'promedioUV');
-guadarUVP(promedioTotal);
-          await setPDispo(promediosPorDispositivo);
-          setLoading(false);  
+          const promedioTotal = _.meanBy(medicionesFiltradas, 'uv');
+          guadarUVP(promedioTotal);
+          await setPDispo(info2.ultimasMediciones);
+          await setDispositivo2(info2.ultimasMediciones);
+          var map = L.map('map', { attributionControl: false }).setView([-4.0079, -79.2115], 14);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+      // Icono personalizado con imagen local
+      var customIcon = L.divIcon({
+        className: 'custom-marker',
+        html: `<div class="marker-container"><img src="${customMarkerImage}" alt="Marcador"></div>`
+      });
+          info2.ultimasMediciones.forEach((dispositivo) => {
+        var marker = L.marker([dispositivo.latitud, dispositivo.longitud], {
+          icon: customIcon,
+        }).addTo(map);
+
+        marker.bindPopup(dispositivo.nombre).openPopup();
+      });
+          setLoading(false);
         }
       } catch (error) {
         console.error("Error al obtener datos:", error);
       }
     };
-    cargarMapa();
     cargarDatos();
   }, []);
   const settings = {
@@ -328,6 +285,7 @@ guadarUVP(promedioTotal);
 
 
   return (
+   
     <div>
       <Header />
       <div className='backgroundGary'></div>
@@ -359,20 +317,21 @@ guadarUVP(promedioTotal);
                   </div>
                   <div className="grid grid-cols-1 gap-6">
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                      {pDisp.map((dispositivo) => (
+                      {dispositivo2.map((dispositivo2) => (
                         <div className="flex gap-2 items-center">
                           <div style={{ height: 70 }}>
                             <div className="card" style={{ border: '1px solid #000000' }}>
                               <ul className="list-unstyled card-body mb-2 pb-2">
-                                <li key={dispositivo.dispositivoId} className="row mb-3">
-                                  <h5 className="card-header" style={{ maxHeight: '2em', overflow: 'auto' }}>{dispositivo.nombre}</h5>
-                                  <div className="col-6" style={{ whiteSpace: 'nowrap' }} >Indice UV: {Math.round((dispositivo.promedioUV) * 100) / 100}</div>
+                                <li key={dispositivo2.id} className="row mb-3">
+                                  
+                                  <h5 className="card-header" style={{ maxHeight: '2em', overflow: 'auto' }}>{dispositivo2.nombre}</h5>
+                                  <div className="col-6" style={{ whiteSpace: 'nowrap' }} >Indice UV: {Math.round((  dispositivo2.medicions[0].uv) * 100) / 100}</div>
                                   <div className="col-7 align-self-center">
                                     <div className="progress" style={{ height: '5px' }}>
                                       <div
-                                        className={`progress-bar ${getColorByUVValue(dispositivo.promedioUV)}`}
+                                        className={`progress-bar ${getColorByUVValue( dispositivo2.medicions[0].uv)}`}
                                         role="progressbar"
-                                        style={{ width: `${dispositivo.promedioUV * 100 / 15}%` }}
+                                        style={{ width: `${dispositivo2.medicions[0].uv* 100 / 15}%` }}
                                         aria-valuenow="15"
                                         aria-valuemin="0"
                                         aria-valuemax="100"
@@ -415,11 +374,11 @@ guadarUVP(promedioTotal);
               <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                 <Slider {...settings}>
                   {pDisp.map((dispositivo) => (
-                    <div key={dispositivo.dispositivoId}>
+                    <div key={dispositivo.id}>
                       <div className="panel panel-default" style={{ height: 350 }}>
                         <div className="panel-heading text-center"> {dispositivo.nombre}</div>
                         {/* Pasa el dispositivoId como prop a Grafica */}
-                        <Grafica dispositivoId={dispositivo.dispositivoId} />
+                        <Grafica dispositivoId={dispositivo.id} />
                       </div>
                     </div>
                   ))}
