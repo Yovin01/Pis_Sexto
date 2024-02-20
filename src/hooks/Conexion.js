@@ -71,3 +71,16 @@ export const postAPI = async (data, url, key) => {
 
     return datos;
 };
+
+export const PostGuardar = async (data, key, urls) => {
+    const headers = {
+        "Content-Type": "application/json",
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(`${URL}/${urls}`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(data),
+    })).json();
+    return datos;
+}

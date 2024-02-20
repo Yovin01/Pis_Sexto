@@ -1,53 +1,46 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-image: url('../img/imagenesRegistro/imagen.jpg');
-  background-repeat: no-repeat;
+
+.fondo{
+  background-image: url('../img/imagenesRegistro/UNI.png');
   background-size: cover;
+  background-repeat: no-repeat;
+  height: 105vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.container {
-  width: 1000px;
-  height: 1000px;
-  margin: 200px auto;
-  padding: 20px;
+.containerPadre{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.containerRegistro {
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #f5f5f5;
-  flex: 1;
-  padding-right: 40px;
-  background-image: url('../img/imagenesRegistro/unl.png');
-  background-size: 30% auto;
-  background-repeat: no-repeat;
-  background-position:600px 60px ;
-
+  padding-left: 30px;
+  max-height: 850px;
 }
 
+.containerRegistro .iconunl {
+  position: absolute; 
+  top: 80px;
+  right: 550px;
+  width: 180px;
+  height: auto;
+}
 p{
-
 text-align: center;
-color: #d2532c;
+color: #026e2f;
 padding-top: 70px;
+transform: translatey(-90%);
+text-decoration: underline;
 
 }
- 
-header {
-  background-color: #0C2840;
-  padding: 30px;
-}
-
-footer {
-  background-color: #0C2840;
-  padding: 30px;
-  text-align: center;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
-
 /*h1.headerTitulo {
   text-align: center;
   margin-bottom: 30px;
@@ -55,15 +48,16 @@ footer {
 }*/
 
 h1.tituloRegistro {
-  padding-left: 50px;
-  padding-top: 40px;
+  padding-top: 20px;
   font-size: 50px;
   text-align: left;
   margin-bottom: 100px;
   color: #0C2840;
+  
 }
 
 .row {
+  transform: translatey(-50%);
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 25px;
@@ -101,7 +95,7 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 select:focus {
   outline: none;
-  border-color: #4CAF50;
+  border-color: #34b338;
 }
 
 input.name{
@@ -123,8 +117,8 @@ input.correo{
   background-position: right 10px center;
 }
 input.fechanac{
-  padding-right: 40px;
-  background-image: url('../img/imagenesRegistro/nacimiento.png');
+  padding-right: 10px;
+  /*background-image: url('../img/imagenesRegistro/nacimiento.png');*/
   background-repeat: no-repeat;
   background-position: right 10px center;
 }
@@ -159,13 +153,13 @@ button.botonDeRegistro{
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  position: static;
-  transition: background-color 0.3s ease;
-  transform: translatey(120%);
+  position: relative;
+  transition: background-color 0.2s ease;
+  transform: translatey(-90%);
 }
 
 .botonDeRegistro:hover {
-  background-color: #d2532c;
+  background-color: #026e2f;
 }
 
 
@@ -180,7 +174,7 @@ a {
 
 span {
   font-size: 13px;
-  color: #ff5733;
+  color: #c71700;
   font-weight:bolder;
   border-radius: 4px;
 }
