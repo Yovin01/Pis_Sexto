@@ -5,6 +5,7 @@ import Header from './Header';
 import mensajes from '../utiles/Mensajes';
 import { metodoGet } from '../hooks/Conexion';
 import { format } from 'date-fns';
+import BarraMenu from './BarraMenu';
 const VerPeticion = () => {
     const [peticiones, setPeticiones] = useState([]);
     const [bucle, setBucle] = useState(false);
@@ -82,7 +83,7 @@ const VerPeticion = () => {
 
     return (
         <div>
-            <Header />
+            <BarraMenu />
             <div className='backgroundYovin'>
             </div>
             <div className="contentYovin1">
