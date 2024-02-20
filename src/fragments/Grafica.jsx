@@ -123,7 +123,7 @@ class Grafica extends Component {
                             categories: horas,
                             labels: {
                                 formatter: function (value, index) {
-                                    return value + " H"; // Agrega "h" al valor para indicar horas
+                                    return value+ " H"; // Agrega "h" al valor para indicar horas
                                 },
                             },
                         },
@@ -131,7 +131,7 @@ class Grafica extends Component {
                             max: 15, 
                             labels: {
                                 formatter: function (value) {
-                                    return value + " UV"; // Agrega " UV" al valor para indicar índices UV
+                                    return  parseFloat(value.toFixed(2))+ " UV"; // Agrega " UV" al valor para indicar índices UV
                                 },
                             },
                         },
