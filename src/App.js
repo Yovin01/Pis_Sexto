@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Login from './fragments/Login';
 import VerPeticion from './fragments/VerPeticion';
 import Principal from './fragments/Principal';
@@ -25,16 +25,6 @@ function App() {
     }
   }
 
-   const Middeware = ({children}) =>{
-    const autenticado = estaSesion();
-    const location = useLocation();
-    if(autenticado){
-      return children;
-    }else{
-      return <Navigate to= '/login' state={location}/>;
-    }
-  }
-
   const MiddewareRol = ({ children}) => {
     const rol = getRol();
     if (rol === "ADMINISTRADOR") {
@@ -48,7 +38,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/login' element={<Login />} />
-        <Route path='/verpeticiones' element={<VerPeticion />} />
+        <Route path='/verpeticiones' element={<MiddewareRol><MiddewareSesion><VerPeticion /></MiddewareSesion></MiddewareRol>} />
         <Route path='/principalusuario' element={<MiddewareSesion><PrincipalUsuario /></MiddewareSesion>} />
 
         {/* Ruta para cualquier URL no definida */}
@@ -59,9 +49,9 @@ function App() {
 
 
         <Route path='/principal' element={<Principal />} />
-        <Route path='/api' element={<Api />} />
+        <Route path='/api' element={<MiddewareSesion><Api /></MiddewareSesion>} />
         <Route path='/usuariosregistrados' element={<MiddewareRol><MiddewareSesion><UsuariosRegistrados /></MiddewareSesion></MiddewareRol>} />
-        <Route path='/perfil' element={<Perfil />} />
+        <Route path='/perfil' element={<MiddewareSesion><Perfil /></MiddewareSesion>} />
         <Route path='/contactos' element={<Contactos />} />
         <Route path='/sobreapi' element={<SobreApi />} />
         <Route path='/registro' element={<Registro />} />
