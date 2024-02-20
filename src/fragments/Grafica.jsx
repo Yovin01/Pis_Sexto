@@ -122,7 +122,7 @@ class Grafica extends Component {
                         xaxis: {
                             categories: horas,
                             labels: {
-                                formatter: function (value, index) {
+                                formatter: function (value) {
                                     return value+ " H"; // Agrega "h" al valor para indicar horas
                                 },
                             },
