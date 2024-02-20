@@ -4,8 +4,7 @@ body {
   padding: 0;
 }
 .appGary {
-  border: 1px solid #000000;
-  border-radius: 10px;    
+  border: 1px solid #000000;  
   background: #ffffff;
   background-size: cover;
   display: flex;
