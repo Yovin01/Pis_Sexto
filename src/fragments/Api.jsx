@@ -41,7 +41,7 @@ const Api = () => {
       .then((response) => response.json())
       .then((data) => {
         setResultado({ ...resultado, [endpoint]: data });
-        setMensaje("Petición ejecutada con éxito !!! 😃 🎉");
+        setMensaje("Petición ejecutada con éxito  ☀️");
       })
       .catch((error) => {
         console.error('Error en la petición:', error);

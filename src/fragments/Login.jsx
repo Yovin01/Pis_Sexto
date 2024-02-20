@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import mensajes from '../utiles/Mensajes';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
 
     const navegation = useNavigate();
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -25,7 +25,7 @@ const Login = () => {
     };
 
 
-    const onSubmit = (data) => {
+    const onSubmit = (data, event) => {
         var datos = {
             "correo": data.correo,
             "clave": data.clave
@@ -46,6 +46,8 @@ const Login = () => {
             }
         })
     };
+
+
 
     return (
         <div>
@@ -113,7 +115,6 @@ const Login = () => {
 
                             <div className='boton-login'>
                                 <button type='submit' className='button-login-ingresar'>Ingresar</button>
-
                             </div>
 
 

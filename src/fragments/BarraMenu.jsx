@@ -32,7 +32,12 @@ const BarraMenu = () => {
                         <a href="/verpeticiones">Peticiones</a>
                     </>
                 )}
-                {rol === 'USUARIO' && <a href="/api">API</a>}
+                {rol === 'USUARIO' && (
+                    <>
+                        <a href="/api">API</a>
+                        <a href="/principal">Monitor UV</a>
+                    </>
+                )}
                 <a href="/perfil">Perfil</a>
                 <a href="/principal" onClick={handleClick}>Cerrar Sesión</a>
             </nav>

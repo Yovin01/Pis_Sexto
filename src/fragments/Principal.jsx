@@ -15,12 +15,26 @@ import ChatBot from './ChatBot';
 import { getUVD, getUVP } from '../utiles/ides';
 import mensajes from '../utiles/Mensajes';
 import { getAPI, postAPI } from '../hooks/Conexion';
+import BarraMenu from './BarraMenu';
+import { getRol, getToken} from '../utiles/SessionUtil';
+
 const Principal = () => {
   const [dispositivos, setDispositivos] = useState([]);
   const [pdispos, setPdispos] = useState([]);
   const [pDisp, setPDispo] = useState([]);
   const [bucle, setBucle] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+  useEffect(() => {
+    // Comprueba si hay un token de autenticación almacenado en el almacenamiento local
+    const token = getToken();
+
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   useEffect(() => {
     const cargarMapa = async () => {
@@ -208,7 +222,7 @@ const cards = () => {
 
   return (
     <div>
-      <Header />
+      {isLoggedIn ? <BarraMenu /> : <Header />}
       <div className='backgroundGary'></div>
       <div className="containerGary">
 
