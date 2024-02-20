@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
 import _ from 'lodash';
-import { guadarUVD, guadarUVP } from "../utiles/ides";
+import { getUVD, getUVP, guadarUVD, guadarUVP } from "../utiles/ides";
 
-const URL = "http://localhost:3004/api/medicionFechas";
+const URL = "https://computacion.unl.edu.ec/uv/api/medicionFechas";
 
 const obtenerFechaHoyEcuador = () => {
     const fechaHoy = new Date();
@@ -32,6 +32,7 @@ class Grafica extends Component {
                     name: "Horas del dia",
                     categories: [],
                 },
+                max: 15,  
                 yaxis: {
                     labels: {
                         formatter: function (value) {
@@ -52,7 +53,7 @@ class Grafica extends Component {
 
     componentDidMount() {
         const dispositivoId = parseInt(this.props.dispositivoId, 10);
-        console.log(this.props);
+     //   console.log(this.props);
         const data = {
             fechaInicio: obtenerFechaHoyEcuador(),
             fechaFin: obtenerFechaMananaEcuador()
@@ -74,32 +75,50 @@ class Grafica extends Component {
                     (medicion) => medicion.dispositivoId === dispositivoId
                   
                   );
-                  console.log(medicionesDispositivo);
+             //     console.log(medicionesDispositivo );
                 // Agrupar las mediciones por hora y calcular el promedio
                 const medicionesPorHora = _.groupBy(
                     medicionesDispositivo,
                     (medicion) => {
-                      const fecha = new Date(medicion.fecha);
-                      return (
-                        fecha.getHours() +
-                        ":" +
-                        ("0" + fecha.getMinutes()).slice(-2)
-                      );
+                        const fecha = new Date(medicion.fecha);
+                        
+                        // Filtrar solo las horas entre las 6 am y las 5 pm (17:00)
+                        const hora = fecha.getHours()+5;
+                        if (hora >= 6 && hora <= 17) {
+                            return (
+                                (hora ) +
+                                ":" +
+                                ("0" + fecha.getMinutes()).slice(-2)
+                            );
+                        }else if (hora < 6 ){
+                            return (
+                                (hora ) +
+                                ":" +
+                                ("0" + fecha.getMinutes()).slice(-2)
+                            );
+                        }
                     }
-                  );
+                );
+                
 
-                const promediosPorHora = _.map(medicionesPorHora, (mediciones, hora) => ({
-                    hora,
-                    promedioUV: _.meanBy(mediciones, 'uv'),
-                }));
-
-                // Separar las horas y promedios para construir el gráfico
-                const horas = promediosPorHora.map(item => item.hora);
-                const medicionesUV = promediosPorHora.map(item => item.promedioUV);
+                const promediosPorHora = _.map(medicionesPorHora, (mediciones, hora) => {
+                    const horaInt = parseInt(hora.split(':')[0], 10);
+                    if (horaInt >= 6 && horaInt <= 17) {
+                        return {
+                            hora,
+                            promedioUV: _.meanBy(mediciones, 'uv'),
+                        };
+                    } else {
+                        return null; 
+                    }
+                });
+                const promediosValidos = promediosPorHora.filter(item => item !== null);
+            //    console.log(promediosPorHora);
+                const horas = promediosValidos.map(item => item.hora);
+                const medicionesUV = promediosValidos.map(item => item.promedioUV);
                 const promedioTotalDia = _.mean(medicionesUV);
-                // Calcular los promedios por dispositivo
-             
-                guadarUVP(promedioTotalDia);
+                guadarUVP(getUVP()+ promedioTotalDia);
+                console.log(getUVP());
                 // Actualizar el estado con los datos del gráfico
                 this.setState({
                     options: {
@@ -113,6 +132,7 @@ class Grafica extends Component {
                             },
                         },
                         yaxis: {
+                            max: 15, 
                             labels: {
                                 formatter: function (value) {
                                     return value + " UV"; // Agrega " UV" al valor para indicar índices UV

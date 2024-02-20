@@ -62,7 +62,7 @@ export const postAPI = async (data, url, key) => {
       //  body: JSON.stringify(data)
     };
 
-    const datos = await (await fetch(URLA+url , {
+    const datos = await (await fetch(URLAPI+url , {
         method: "POST",
         headers: headers,
         body: JSON.stringify(data)
