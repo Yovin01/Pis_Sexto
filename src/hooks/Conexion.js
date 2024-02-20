@@ -1,4 +1,4 @@
-const URL = "http://localhost:5006/api"
+const URL = "http://localhost:3006/api"
 const URLAPI = 'https://computacion.unl.edu.ec/uv/api/';
 const URLA = 'http://localhost:3004/api/';
 
@@ -62,7 +62,7 @@ export const postAPI = async (data, url, key) => {
       //  body: JSON.stringify(data)
     };
 
-    const datos = await (await fetch(URLA+url , {
+    const datos = await (await fetch(URLAPI+url , {
         method: "POST",
         headers: headers,
         body: JSON.stringify(data)
@@ -82,5 +82,6 @@ export const PostGuardar = async (data, key, urls) => {
         headers: headers,
         body: JSON.stringify(data),
     })).json();
+    console.log("BUUU", datos);
     return datos;
 }

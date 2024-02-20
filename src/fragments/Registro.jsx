@@ -50,7 +50,9 @@ const Registro = () => {
             "institucion": data.institucion,
             "external_rol": dataR[1].external_id,
             "fecha_nacimiento": data.fecha_nacimiento,
+            "peticion":data.peticion,
         };
+        console.log(data.fecha_nacimiento);
         PostGuardar(datos, getToken(), '/guardar/personas').then((info) => {
             if (info.code !== 200) {
                 mensajes(info.msg, 'error', 'Error');
@@ -68,9 +70,7 @@ const Registro = () => {
                 <div className="registro-containerRegistro">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <h1 className="registro-tituloRegistro">REGISTRO</h1>
-                        <div className='registro-iconunl'>
-                            <img src={logoIcon} alt="Logo UNL" />
-                        </div>
+
                         <div className="registro-row">
                             {/* NOMBRES DEL USUARIO */}
                             <div className="registro-col">
@@ -225,12 +225,29 @@ const Registro = () => {
                                 }
                             </div>
                         </div>
+                        {/* PETICION */}
+                        <div className="registro-row">
+                            <div className="registro-col">
+                                <label className="registro-label" htmlFor="peticion">Petición:</label>
+                                <textarea className="registro-input registro-peticion" name='peticion' id="peticion" placeholder="Petición..." {...register("peticion", {
+                                    required: {
+                                        value: true,
+                                        message: "Petición es requerida"
+                                    },
+                                    maxLength: {
+                                        value: 300,
+                                        message: "Este campo debe tener un máximo de 300 caracteres"
+                                    }
+                                })} />
+                                {
+                                    errors.peticion && <span className="registro-span">{errors.peticion.message}</span>
+                                }
+                            </div>
+                        </div>
+
                         <div style={{ textAlign: 'center' }}>
                             <button type='submit' className="registro-botonDeRegistro" >Registrarse</button>
                         </div>
-                        <p className="registro-p">
-                            Registrate, es fácil y rápido!
-                        </p>
                     </form>
                 </div>
             </div>

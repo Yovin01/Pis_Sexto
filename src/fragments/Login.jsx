@@ -42,7 +42,7 @@ const Login = () => {
                 saveUser(infoAux.user);
                 saveCorreo(infoAux.correo);
                 navegation("/principalusuario");
-                mensajes(info.info);
+                mensajes(info.msg);
             }
         })
     };

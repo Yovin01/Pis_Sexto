@@ -3,7 +3,7 @@ import Chart from "react-apexcharts";
 import _ from 'lodash';
 import { guadarUVD, guadarUVP } from "../utiles/ides";
 
-const URL = "http://localhost:3004/api/medicionFechas";
+const URL = "https://computacion.unl.edu.ec/uv/api/medicionFechas";
 
 const obtenerFechaHoyEcuador = () => {
     const fechaHoy = new Date();
