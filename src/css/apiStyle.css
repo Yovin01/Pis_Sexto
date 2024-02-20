@@ -41,11 +41,13 @@
 }
 
 .containerConsola {
-  border: 2px solid #0C2840;
+  /*border: 2px solid #0C2840;*/
   margin: 10px;
   padding: 10px;
   display: none;
   border-radius: 15px;
+  max-height: 550px; /* ajusta el valor según tu necesidad */
+  overflow-y: auto; /* añade un scrollbar vertical cuando sea necesario */
 }
 
 /* Estilo para mostrar el contenedor de consola */
@@ -62,11 +64,12 @@
 
 .containerPeticiones {
   margin-top: 50px;
-  margin-left: 50px;
+  width: 100%;
 }
 
 .message {
-  background-color: rgba(65, 105, 225, 0.7);
+  background-color: #0b243a;
+  font-weight: bold;
   /* Medio azul oscuro semi-transparente */
   color: #fff;
   /* Color de texto blanco */
@@ -74,7 +77,7 @@
   /* Espaciado interno */
   border-radius: 10px;
   /* Borde redondeado */
-  border: 2px solid #4169e1;
+  border: 2px solid #0b243a;
   /* Borde sólido azul oscuro */
   display: inline-block;
 }

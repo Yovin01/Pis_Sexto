@@ -111,11 +111,16 @@ const Login = () => {
                                 <label className={focused.clave ? 'active' : ''}>Contraseña</label>
                             </div>
 
-                            <button type='submit' className='btnIngresar'>Ingresar</button>
+                            <div className='boton-login'>
+                                <button type='submit' className='button-login-ingresar'>Ingresar</button>
+
+                            </div>
+
+
                         </form>
 
                         <div className='login-register'>
-                            <p>¿No tienes cuenta? <a href="#" className='register-link'>Regístrate</a></p>
+                            <p>¿No tienes cuenta? <a href="/registro" className='register-link'>Regístrate</a></p>
                         </div>
                     </div>
                 </div>

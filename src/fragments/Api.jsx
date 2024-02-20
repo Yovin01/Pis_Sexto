@@ -122,12 +122,9 @@ const Api = () => {
               </label>
             </div>
           </div>
-        </div>
 
+          {/* Botones para las peticiones GET */}
 
-
-        {/* Botones para las peticiones GET */}
-        <div>
           <h2 className="text-lg font-semibold mb-2">
             PETICIONES GET
           </h2>
@@ -161,17 +158,16 @@ const Api = () => {
             </div>
           </div>
         </div>
+        <div>
+          
+            {/* Contenedores para mostrar los resultados de las peticiones */}
+            {renderizarResultados()}
+          <div className='containerPeticiones' style={{ textAlign: 'center' }}>
+            {mensaje && <p id="run-message" className="message w-full">{mensaje}</p>}
+          </div>
+        </div>
       </section>
 
-      {/* Contenedor para mensajes */}
-      <div className='containerPeticiones'>
-        {mensaje && <p id="run-message" className="message">{mensaje}</p>}
-      </div>
-
-      <section className='grid grid-cols-1 gap-6'>
-        {/* Contenedores para mostrar los resultados de las peticiones */}
-        {renderizarResultados()}
-      </section>
     </div>
   );
 };

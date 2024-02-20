@@ -10,6 +10,7 @@ import UsuariosRegistrados from './fragments/UsuariosRegistrados';
 import Perfil from './fragments/Perfil';
 import Contactos from './fragments/Contactos';
 import SobreApi from './fragments/SobreApi';
+import Registro from './fragments/Registro';
 import { estaSesion, getRol } from './utiles/SessionUtil';
 
 
@@ -63,6 +64,7 @@ function App() {
         <Route path='/perfil' element={<Perfil />} />
         <Route path='/contactos' element={<Contactos />} />
         <Route path='/sobreapi' element={<SobreApi />} />
+        <Route path='/registro' element={<Registro />} />
       </Routes>
     </div>
   );
